@@ -2488,11 +2488,11 @@ void tTJSNI_BaseLayer::SaveLayerImage(const ttstr &name, const ttstr &type)
 		dic->PropSet(TJS_MEMBERENSURE, TJS_W("mode"), 0, &val, dic );
 
 		if( ImageLeft > 0 ) {
-			val = tTJSVariant((tTVInteger)ImageLeft);
+			val = tTJSVariant(ImageLeft);
 			dic->PropSet(TJS_MEMBERENSURE, TJS_W("offs_x"), 0, &val, dic );
 		}
 		if( ImageTop > 0 ) {
-			val = tTJSVariant((tTVInteger)ImageTop);
+			val = tTJSVariant(ImageTop);
 			dic->PropSet(TJS_MEMBERENSURE, TJS_W("offs_y"), 0, &val, dic );
 		}
 		if( ImageLeft > 0 || ImageTop > 0 ) {
@@ -2976,8 +2976,8 @@ bool tTJSNI_BaseLayer::HitTestNoVisibleCheck(tjs_int x, tjs_int y)
 			OnHitTest_Work = true;
 
 			tTJSVariant param[3];
-			param[0] = (tTVInteger)x;
-			param[1] = (tTVInteger)y;
+			param[0] = x;
+			param[1] = y;
 			param[2] = true;
 			static ttstr eventname(TJS_W("onHitTest"));
 			TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 3, param);
@@ -3065,8 +3065,8 @@ void tTJSNI_BaseLayer::FireClick(tjs_int x, tjs_int y)
 	if(Owner && !Shutdown)
 	{
 		tTJSVariant param[2];
-		param[0] = (tTVInteger)x;
-		param[1] = (tTVInteger)y;
+		param[0] = x;
+		param[1] = y;
 		static ttstr eventname(TJS_W("onClick"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 2, param);
 	}
@@ -3077,8 +3077,8 @@ void tTJSNI_BaseLayer::FireDoubleClick(tjs_int x, tjs_int y)
 	if(Owner && !Shutdown)
 	{
 		tTJSVariant param[2];
-		param[0] = (tTVInteger)x;
-		param[1] = (tTVInteger)y;
+		param[0] = x;
+		param[1] = y;
 		static ttstr eventname(TJS_W("onDoubleClick"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 2, param);
 	}
@@ -3090,9 +3090,9 @@ void tTJSNI_BaseLayer::FireMouseDown(tjs_int x, tjs_int y, tTVPMouseButton mb,
 	if(Owner && !Shutdown)
 	{
 		tTJSVariant param[4];
-		param[0] = (tTVInteger)x;
-		param[1] = (tTVInteger)y;
-		param[2] = (tTVInteger) mb;
+		param[0] = x;
+		param[1] = y;
+		param[2] = (tjs_int) mb;
 		param[3] = (tjs_int64)flags;
 		static ttstr eventname(TJS_W("onMouseDown"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 4, param);
@@ -3105,9 +3105,9 @@ void tTJSNI_BaseLayer::FireMouseUp(tjs_int x, tjs_int y, tTVPMouseButton mb,
 	if(Owner && !Shutdown)
 	{
 		tTJSVariant param[4];
-		param[0] = (tTVInteger)x;
-		param[1] = (tTVInteger)y;
-		param[2] = (tTVInteger) mb;
+		param[0] = x;
+		param[1] = y;
+		param[2] = (tjs_int) mb;
 		param[3] = (tjs_int64)flags;
 		static ttstr eventname(TJS_W("onMouseUp"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 4, param);
@@ -3119,8 +3119,8 @@ void tTJSNI_BaseLayer::FireMouseMove(tjs_int x, tjs_int y, tjs_uint32 flags)
 	if(Owner && !Shutdown)
 	{
 		tTJSVariant param[3];
-		param[0] = (tTVInteger)x;
-		param[1] = (tTVInteger)y;
+		param[0] = x;
+		param[1] = y;
 		param[2] = (tjs_int64)flags;
 		static ttstr eventname(TJS_W("onMouseMove"));
 		TVPPostEvent(Owner, Owner, eventname, 0,
@@ -3200,7 +3200,7 @@ void tTJSNI_BaseLayer::FireTouchScaling( tjs_real startdist, tjs_real curdist, t
 {
 	if(Owner && !Shutdown)
 	{
-		tTJSVariant arg[5] = { startdist, curdist, cx, cy, (tTVInteger)flag };
+		tTJSVariant arg[5] = { startdist, curdist, cx, cy, flag };
 		static ttstr eventname(TJS_W("onTouchScaling"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 5, arg);
 	}
@@ -3210,7 +3210,7 @@ void tTJSNI_BaseLayer::FireTouchRotate( tjs_real startangle, tjs_real curangle, 
 {
 	if(Owner && !Shutdown)
 	{
-		tTJSVariant arg[6] = { startangle, curangle, dist, cx, cy, (tTVInteger)flag };
+		tTJSVariant arg[6] = { startangle, curangle, dist, cx, cy, flag };
 		static ttstr eventname(TJS_W("onTouchRotate"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 6, arg);
 	}
@@ -3532,8 +3532,8 @@ void tTJSNI_BaseLayer::FireKeyDown(tjs_uint key, tjs_uint32 shift)
 	if(Owner && !Shutdown)
 	{
 		tTJSVariant param[3];
-		param[0] = (tTVInteger)key;
-		param[1] = (tTVInteger)shift;
+		param[0] = (tjs_int)key;
+		param[1] = (tjs_int)shift;
 		param[2] = true;
 		static ttstr eventname(TJS_W("onKeyDown"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 3, param);
@@ -3545,8 +3545,8 @@ void tTJSNI_BaseLayer::FireKeyUp(tjs_uint key, tjs_uint32 shift)
 	if(Owner && !Shutdown)
 	{
 		tTJSVariant param[3];
-		param[0] = (tTVInteger)key;
-		param[1] = (tTVInteger)shift;
+		param[0] = (tjs_int)key;
+		param[1] = (tjs_int)shift;
 		param[2] = true;
 		static ttstr eventname(TJS_W("onKeyUp"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 3, param);
@@ -3573,7 +3573,7 @@ void tTJSNI_BaseLayer::FireMouseWheel(tjs_uint32 shift, tjs_int delta, tjs_int x
 {
 	if(Owner && !Shutdown)
 	{
-		tTJSVariant val[4] = { (tTVInteger)shift, (tTVInteger)delta, (tTVInteger)x, (tTVInteger)y };
+		tTJSVariant val[4] = { (tjs_int)shift, delta, x, y };
 		static ttstr eventname(TJS_W("onMouseWheel"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 4, val);
 	}
@@ -7628,7 +7628,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/getMaskPixel)
 {
 	TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
 	if(numparams < 2) return TJS_E_BADPARAMCOUNT;
-	if(result) *result = (tTVInteger)_this->GetMaskPixel(*param[0], *param[1]);
+	if(result) *result = _this->GetMaskPixel(*param[0], *param[1]);
 	return TJS_S_OK;
 }
 TJS_END_NATIVE_METHOD_DECL(/*func. name*/getMaskPixel)
@@ -7646,7 +7646,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/getProvincePixel)
 {
 	TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
 	if(numparams < 2) return TJS_E_BADPARAMCOUNT;
-	if(result) *result = (tTVInteger)_this->GetProvincePixel(*param[0], *param[1]);
+	if(result) *result = _this->GetProvincePixel(*param[0], *param[1]);
 	return TJS_S_OK;
 }
 TJS_END_NATIVE_METHOD_DECL(/*func. name*/getProvincePixel)
@@ -8765,7 +8765,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/focus) // not setFocus
 
 	bool succeeded = _this->SetFocus(direction);
 
-	if(result) *result = (tTVInteger)succeeded;
+	if(result) *result = (tjs_int)succeeded;
 
 	return TJS_S_OK;
 }
@@ -9592,7 +9592,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(order) // not orderIndex
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)_this->GetOrderIndex();
+		*result = (tjs_int)_this->GetOrderIndex();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -9612,7 +9612,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(absolute) // not absoluteOrderIndex
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)_this->GetAbsoluteOrderIndex();
+		*result = (tjs_int)_this->GetAbsoluteOrderIndex();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -9632,7 +9632,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(absoluteOrderMode) // not absoluteOrderIndexMode
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)_this->GetAbsoluteOrderMode();
+		*result = (tjs_int)_this->GetAbsoluteOrderMode();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -9706,7 +9706,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(opacity)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)_this->GetOpacity();
+		*result = _this->GetOpacity();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -9749,7 +9749,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(isPrimary)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)_this->IsPrimary();
+		*result = (tjs_int)_this->IsPrimary();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -9763,7 +9763,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(left)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)_this->GetLeft();
+		*result = _this->GetLeft();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -9783,7 +9783,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(top)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)_this->GetTop();
+		*result = _this->GetTop();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -9923,7 +9923,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(type)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)_this->GetType();
+		*result = (tjs_int)_this->GetType();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -9943,7 +9943,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(face)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)_this->GetFace();
+		*result = (tjs_int)_this->GetFace();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -9963,7 +9963,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(holdAlpha)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)_this->GetHoldAlpha();
+		*result = (tjs_int)_this->GetHoldAlpha();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -10063,7 +10063,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(imageModified)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)_this->GetImageModified();
+		*result = (tjs_int)_this->GetImageModified();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -10083,7 +10083,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(hitType)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)_this->GetHitType();
+		*result = (tjs_int)_this->GetHitType();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -10103,7 +10103,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(hitThreshold)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)_this->GetHitThreshold();
+		*result = _this->GetHitThreshold();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -10123,7 +10123,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(cursor)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)_this->GetCursor();
+		*result = _this->GetCursor();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -10146,7 +10146,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(cursorX)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)_this->GetCursorX();
+		*result = _this->GetCursorX();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -10166,7 +10166,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(cursorY)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)_this->GetCursorY();
+		*result = _this->GetCursorY();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -10346,7 +10346,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(focused)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)_this->GetFocused();
+		*result = (tjs_int)_this->GetFocused();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -10394,7 +10394,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(attentionLeft)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)_this->GetAttentionLeft();
+		*result = _this->GetAttentionLeft();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -10414,7 +10414,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(attentionTop)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)_this->GetAttentionTop();
+		*result = _this->GetAttentionTop();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -10454,7 +10454,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(imeMode)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)_this->GetImeMode();
+		*result = (tjs_int)_this->GetImeMode();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -10549,7 +10549,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(hasImage)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);
-		*result = (tTVInteger)(bool)_this->GetHasImage();
+		*result = (tjs_int)(bool)_this->GetHasImage();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -10597,7 +10597,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(mainImageBufferPitch)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);;
-		*result = (tTVInteger)_this->GetMainImagePixelBufferPitch();
+		*result = _this->GetMainImagePixelBufferPitch();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -10639,7 +10639,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(provinceImageBufferPitch)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Layer);;
-		*result = (tTVInteger)_this->GetProvinceImagePixelBufferPitch();
+		*result = _this->GetProvinceImagePixelBufferPitch();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -10969,7 +10969,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/getTextWidth)
 	TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Font);
 	if(numparams < 1) return TJS_E_BADPARAMCOUNT;
 
-	if(result) *result = (tTVInteger)_this->GetTextWidth(*param[0]);
+	if(result) *result = _this->GetTextWidth(*param[0]);
 
 	return TJS_S_OK;
 }
@@ -10980,7 +10980,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/getTextHeight)
 	TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Font);
 	if(numparams < 1) return TJS_E_BADPARAMCOUNT;
 
-	if(result) *result = (tTVInteger)_this->GetTextHeight(*param[0]);
+	if(result) *result = _this->GetTextHeight(*param[0]);
 
 	return TJS_S_OK;
 }
@@ -11066,7 +11066,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/doUserSelect)
 		0;
 #endif
 
-	if(result) *result = (tTVInteger)ret;
+	if(result) *result = ret;
 
 	return TJS_S_OK;
 }
@@ -11184,7 +11184,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(height)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Font);
-		*result = (tTVInteger)_this->GetFontHeight();
+		*result = _this->GetFontHeight();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -11284,7 +11284,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(angle)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Font);
-		*result = (tTVInteger)_this->GetFontAngle();
+		*result = _this->GetFontAngle();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -11324,7 +11324,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(rasterizer)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)TVPGetFontRasterizer();
+		*result = TVPGetFontRasterizer();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER

@@ -319,7 +319,7 @@ class iTVPBaseBitmap;
 //---------------------------------------------------------------------------
 // TVPLoadGraphic
 //---------------------------------------------------------------------------
-extern int TVPLoadGraphic(iTVPBaseBitmap *dest, const ttstr &name, tjs_int32 keyidx,
+extern int TVPLoadGraphic(iTVPBaseBitmap *dest, const ttstr &name, tjs_int keyidx,
 	tjs_uint desw, tjs_uint desh,
 	tTVPGraphicLoadMode mode, ttstr *provincename = NULL, iTJSDispatch2 ** metainfo = NULL);
 	// throws exception when this function can not handle the file

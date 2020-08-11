@@ -2623,7 +2623,7 @@ void tTJSInterCodeContext::ProcessStringFunction(const tjs_char *member,
 
 		if(!s || !pstr)
 		{
-			if(result) *result = (tTVInteger)-1;
+			if(result) *result = (tjs_int)-1;
 			if(pstr) pstr->Release();
 			return;
 		}
@@ -2646,7 +2646,7 @@ void tTJSInterCodeContext::ProcessStringFunction(const tjs_char *member,
 		}
 		if(start >= s_len)
 		{
-			if(result) *result = (tTVInteger)-1;
+			if(result) *result = (tjs_int)-1;
 			if(pstr) pstr->Release();
 			return;
 		}
@@ -2654,11 +2654,11 @@ void tTJSInterCodeContext::ProcessStringFunction(const tjs_char *member,
 		p = TJS_strstr(s + start, (const tjs_char*)*pstr);
 		if(!p)
 		{
-			if(result) *result = (tTVInteger)-1;
+			if(result) *result = (tjs_int)-1;
 		}
 		else
 		{
-			if(result) *result = (tTVInteger)(p-s);
+			if(result) *result = (tjs_int)(p-s);
 		}
 		if(pstr) pstr->Release();
 		return;
@@ -2876,7 +2876,7 @@ void tTJSInterCodeContext::ProcessStringFunction(const tjs_char *member,
 	{
 		if(numargs != 1) TJSThrowFrom_tjs_error( TJS_E_BADPARAMCOUNT );
 		if(!result) return;
-		*result = target.StartsWith( args[0]->AsStringNoAddRef() ) ? (tTVInteger)1 : (tTVInteger)0;
+		*result = target.StartsWith( args[0]->AsStringNoAddRef() ) ? 1 : 0;
 		return;
 	}
 	else if(TJS_STR_METHOD_IS(endsWith))
@@ -2888,7 +2888,7 @@ void tTJSInterCodeContext::ProcessStringFunction(const tjs_char *member,
 		tjs_int len = str->GetLength();
 		if( len > s_len )
 		{
-			*result = (tTVInteger)0;
+			*result = 0;
 		}
 		else
 		{
@@ -2902,7 +2902,7 @@ void tTJSInterCodeContext::ProcessStringFunction(const tjs_char *member,
 				}
 				s++, d++;
 			}
-			*result = ret ? (tTVInteger)1 : (tTVInteger)0;
+			*result = ret ? 1 : 0;
 		}
 		return;
 	}
@@ -3111,7 +3111,7 @@ void tTJSInterCodeContext::RegisterObjectMember(iTJSDispatch2 * dest)
 					Dest->PropSet(TJS_MEMBERENSURE|TJS_IGNOREPROP|flags,
 					param[0]->GetString(), NULL, &val, Dest);
 			}
-			if(result) *result = (tTVInteger)(1); // returns true
+			if(result) *result = (tjs_int)(1); // returns true
 			return TJS_S_OK;
 		}
 	};

@@ -21,8 +21,8 @@ getSample(tTJSVariant *result,tjs_int numparams, tTJSVariant **param, iTJSDispat
 		short *buf = (short*)malloc(n * sizeof(*buf));
 		if (buf) {
 			tTJSVariant buffer     = (tTVInteger)buf;
-			tTJSVariant numsamples = (tTVInteger)n;
-			tTJSVariant channel    = (tTVInteger)1;
+			tTJSVariant numsamples = n;
+			tTJSVariant channel    = 1;
 			tTJSVariant *p[3] = {&buffer, &numsamples, &channel};
 			if (TJS_SUCCEEDED(ret = objthis->FuncCall(0, TJS_W("getVisBuffer"), NULL, NULL, 3, p, objthis))) {
 				int c=0;
@@ -32,7 +32,7 @@ getSample(tTJSVariant *result,tjs_int numparams, tTJSVariant **param, iTJSDispat
 						sum += buf[i]; c++;
 					}
 				}
-				*result = (tTVInteger)(c>0 ? sum / c : 0);
+				*result = c>0 ? sum / c : 0;
 			}
 			free(buf);
 		}
@@ -72,18 +72,16 @@ public:
 	{
 		buf = new short[counts];
 		// useVisBuffer = true; にする
-		tTJSVariant val((tTVInteger)1);
+		tTJSVariant val(1);
 		tjs_error r = objthis->PropSet(0, TJS_W("useVisBuffer"), NULL, &val, objthis);
-#if 0
 		if (r != TJS_S_OK)
 			TVPAddLog(ttstr(TJS_W("useVisBuffer=1 failed: ")) + ttstr(r));
-#endif
 
 		// getVisBuffer用の引数を作る
 		vBuffer     = (tTVInteger)buf;
-		vChannel    = (tTVInteger)1;
-		vNumSamples = (tTVInteger)counts;
-		vAheads     = (tTVInteger)aheads;
+		vChannel    = 1;
+		vNumSamples = counts;
+		vAheads     = aheads;
 		params[0] = &vBuffer;
 		params[1] = &vNumSamples;
 		params[2] = &vChannel;
@@ -104,9 +102,7 @@ public:
 		tTJSVariant result;
 		tjs_error r = objthis->FuncCall(0, TJS_W("getVisBuffer"), &hint, &result, 4, params, objthis);
 
-#if 0
 		if (r != TJS_S_OK) TVPAddLog(ttstr(TJS_W("getVisBuffer failed: "))+ttstr(r));
-#endif
 
 		int cnt = (int)result.AsInteger();
 		if (cnt > counts || cnt < 0) cnt = counts;
@@ -132,11 +128,11 @@ public:
 		delete[] buf;
 		buf = new short[counts];
 		vBuffer     = (tTVInteger)buf;
-		vNumSamples = (tTVInteger)counts;
+		vNumSamples = counts;
 	}
 	int  getSampleAhead() const  { return aheads; }
 	void setSampleAhead(int ahd) {
-		vAheads     = (tTVInteger)(aheads = ahd);
+		vAheads     = (aheads = ahd);
 	}
 
 	/**

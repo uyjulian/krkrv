@@ -485,7 +485,7 @@ void TVPSaveAsJPG(void* formatdata, tTJSBinaryStream* dst, const iTVPBaseBitmap*
 				if(numparams < 3) return TJS_E_BADPARAMCOUNT;
 				tjs_uint32 flags = (tjs_int)*param[1];
 				if(flags & TJS_HIDDENMEMBER) {	// hidden members are not processed
-					if(result) *result = (tTVInteger)1;
+					if(result) *result = (tjs_int)1;
 					return TJS_S_OK;
 				}
 				// push items
@@ -515,7 +515,7 @@ void TVPSaveAsJPG(void* formatdata, tTJSBinaryStream* dst, const iTVPBaseBitmap*
 						opt_->progressive = false;
 					}
 				}
-				if(result) *result = (tTVInteger)1;
+				if(result) *result = (tjs_int)1;
 				return TJS_S_OK;
 			}
 		} callback( &opt );

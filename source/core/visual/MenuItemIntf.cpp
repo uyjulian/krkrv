@@ -297,7 +297,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/popup) // not trackPopup
 	tjs_int x = *param[1];
 	tjs_int y = *param[2];
 	tjs_int rv = _this->TrackPopup(flags, x, y);
-	if (result) *result = (tTVInteger)rv;
+	if (result) *result = rv;
 	return TJS_S_OK;
 }
 TJS_END_NATIVE_METHOD_DECL(/*func. name*/popup) // not trackPopup
@@ -403,7 +403,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(group)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_MenuItem);
-		*result = (tTVInteger)_this->GetGroup();
+		*result = _this->GetGroup();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER

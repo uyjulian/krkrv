@@ -618,7 +618,7 @@ void TVPLoadHeaderPNG(void* formatdata, tTJSBinaryStream *src, iTJSDispatch2** d
 		(*dic)->PropSet(TJS_MEMBERENSURE, TJS_W("width"), 0, &val, (*dic) );
 		val = tTJSVariant((tjs_int64)height);
 		(*dic)->PropSet(TJS_MEMBERENSURE, TJS_W("height"), 0, &val, (*dic) );
-		val = tTJSVariant((tTVInteger)bit_depth);
+		val = tTJSVariant(bit_depth);
 		(*dic)->PropSet(TJS_MEMBERENSURE, TJS_W("bpp"), 0, &val, (*dic) );
 		// color_type,interlace_type,compression_type,filter_type も入れた方がいいが……
 
@@ -627,9 +627,9 @@ void TVPLoadHeaderPNG(void* formatdata, tTJSBinaryStream *src, iTJSDispatch2** d
 		int offset_unit_type;
 		if( png_get_oFFs(png_ptr, info_ptr, &offset_x, &offset_y, &offset_unit_type) )
 		{
-			val = tTJSVariant((tTVInteger)offset_x);
+			val = tTJSVariant(offset_x);
 			(*dic)->PropSet(TJS_MEMBERENSURE, TJS_W("offset x"), 0, &val, (*dic) );
-			val = tTJSVariant((tTVInteger)offset_y);
+			val = tTJSVariant(offset_y);
 			(*dic)->PropSet(TJS_MEMBERENSURE, TJS_W("offset y"), 0, &val, (*dic) );
 			switch(offset_unit_type)
 			{

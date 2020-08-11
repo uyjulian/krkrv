@@ -234,7 +234,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/getDate)
 
 	tm *t = localtime(&_this->DateTime);
 
-	if(result) result->CopyRef(tTVInteger(t->tm_mday));
+	if(result) result->CopyRef(tTJSVariant(t->tm_mday));
 
 	return TJS_S_OK;
 }
@@ -246,7 +246,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/getDay)
 
 	tm *t = localtime(&_this->DateTime);
 
-	if(result) result->CopyRef(tTVInteger(t->tm_wday));
+	if(result) result->CopyRef(tTJSVariant(t->tm_wday));
 
 	return TJS_S_OK;
 }
@@ -258,7 +258,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/getHours)
 
 	tm *t = localtime(&_this->DateTime);
 
-	if(result) result->CopyRef(tTVInteger(t->tm_hour));
+	if(result) result->CopyRef(tTJSVariant(t->tm_hour));
 
 	return TJS_S_OK;
 }
@@ -270,7 +270,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/getMinutes)
 
 	tm *t = localtime(&_this->DateTime);
 
-	if(result) result->CopyRef(tTVInteger(t->tm_min));
+	if(result) result->CopyRef(tTJSVariant(t->tm_min));
 
 	return TJS_S_OK;
 }
@@ -282,7 +282,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/getMonth)
 
 	tm *t = localtime(&_this->DateTime);
 
-	if(result) result->CopyRef(tTVInteger(t->tm_mon));
+	if(result) result->CopyRef(tTJSVariant(t->tm_mon));
 
 	return TJS_S_OK;
 }
@@ -294,7 +294,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/getSeconds)
 
 	tm *t = localtime(&_this->DateTime);
 
-	if(result) result->CopyRef(tTVInteger(t->tm_sec));
+	if(result) result->CopyRef(tTJSVariant(t->tm_sec));
 
 	return TJS_S_OK;
 }
@@ -304,7 +304,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/getTime)
 {
 	TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Date);
 
-	if(result) result->CopyRef(tTVInteger(
+	if(result) result->CopyRef(tTJSVariant(
 			(tjs_int64)(_this->DateTime)*1000L + (tjs_int64)(_this->MillSeconds) ));
 
 	return TJS_S_OK;
@@ -313,7 +313,7 @@ TJS_END_NATIVE_METHOD_DECL(/*func. name*/getTime)
 //----------------------------------------------------------------------
 TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/getTimezoneOffset) // static
 {
-	if(result) result->CopyRef(tTVInteger((tjs_int)(0/60)));
+	if(result) result->CopyRef(tTJSVariant((tjs_int)(0/60)));
 
 	return TJS_S_OK;
 }
@@ -325,7 +325,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/getYear)
 
 	tm *t = localtime(&_this->DateTime);
 
-	if(result) result->CopyRef(tTVInteger(t->tm_year+1900));
+	if(result) result->CopyRef(tTJSVariant(t->tm_year+1900));
 
 	return TJS_S_OK;
 }

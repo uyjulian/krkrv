@@ -314,7 +314,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(volume2)
 #ifdef ENABLE_CDDA
         *result = _this->GetVolume2();
 #else
-        *result = (tTVInteger)0;
+        *result = 0;
 #endif
 
 		return TJS_S_OK;

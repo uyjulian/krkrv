@@ -264,13 +264,13 @@ void tTJSByteCodeLoader::ReadObjects( tTJSScriptBlock* block, const tjs_uint8* b
 				vdata[i] = (tjs_real)DoubleArray[index];
 				break;
 			case TYPE_BYTE:
-				vdata[i] = (tTVInteger)ByteArray[index];
+				vdata[i] = (tjs_int)ByteArray[index];
 				break;
 			case TYPE_SHORT:
-				vdata[i] = (tTVInteger)ShortArray[index];
+				vdata[i] = (tjs_int)ShortArray[index];
 				break;
 			case TYPE_INTEGER:
-				vdata[i] = (tTVInteger)LongArray[index];
+				vdata[i] = (tjs_int)LongArray[index];
 				break;
 			case TYPE_LONG:
 				vdata[i] = (tjs_int64)LongLongArray[index];

@@ -102,7 +102,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(color)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)0;
+		*result = (tjs_int)0;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -119,7 +119,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(visible)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)0;
+		*result = (tjs_int)0;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -153,7 +153,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(fontColor)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)0;
+		*result = (tjs_int)0;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -170,7 +170,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(fontHeight)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)10;
+		*result = (tjs_int)10;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -187,7 +187,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(fontSize)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)10;
+		*result = (tjs_int)10;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -204,7 +204,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(fontBold)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)0;
+		*result = (tjs_int)0;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -221,7 +221,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(fontItalic)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)0;
+		*result = (tjs_int)0;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -238,7 +238,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(fontUnderline)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)0;
+		*result = (tjs_int)0;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -255,7 +255,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(fontStrikeOut)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)0;
+		*result = (tjs_int)0;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -289,7 +289,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(readOnly)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)1;
+		*result = (tjs_int)1;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -306,7 +306,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(wordWrap)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)false;
+		*result = false;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -323,7 +323,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(opacity)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)255;
+		*result = 255;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -340,7 +340,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(showStatusBar)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)false;
+		*result = false;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -357,7 +357,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(showScrollBars)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)false;
+		*result = false;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -391,7 +391,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(borderStyle)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)0;
+		*result = 0;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -408,7 +408,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(width)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)100;
+		*result = 100;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -425,7 +425,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(height)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)100;
+		*result = 100;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -442,7 +442,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(top)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)0;
+		*result = 0;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -459,7 +459,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(left)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)0;
+		*result = 0;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER

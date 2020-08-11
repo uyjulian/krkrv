@@ -142,8 +142,8 @@ void tTVPAsyncImageLoader::HandleLoadedImage() {
 				// error
 				tTJSVariant param[4];
 				param[0] = tTJSVariant((iTJSDispatch2*)NULL,(iTJSDispatch2*)NULL);
-				param[1] = (tTVInteger)1; // true async
-				param[2] = (tTVInteger)1; // true error
+				param[1] = 1; // true async
+				param[2] = 1; // true error
 				param[3] = cmd->result_; // error_mes
 				static ttstr eventname(TJS_W("onLoaded"));
 				if (cmd->owner_ && cmd->owner_->IsValid(0, NULL, NULL, cmd->owner_) == TJS_S_TRUE) {
@@ -172,8 +172,8 @@ void tTVPAsyncImageLoader::HandleLoadedImage() {
 				tTJSVariant param[4];
 				param[0] = tTJSVariant(metainfo,metainfo);
 				if( metainfo ) metainfo->Release();
-				param[1] = (tTVInteger)1; // true async
-				param[2] = (tTVInteger)0; // false error
+				param[1] = 1; // true async
+				param[2] = 0; // false error
 				param[3] = TJS_W(""); // error_mes
 				static ttstr eventname(TJS_W("onLoaded"));
 				if (cmd->owner_ && cmd->owner_->IsValid(0, NULL, NULL, cmd->owner_) == TJS_S_TRUE) {
@@ -203,8 +203,8 @@ void tTVPAsyncImageLoader::LoadRequest( iTJSDispatch2 *owner, tTJSNI_Bitmap* bmp
 		tTJSVariant param[4];
 		param[0] = tTJSVariant(metainfo,metainfo);
 		if( metainfo ) metainfo->Release();
-		param[1] = (tTVInteger)0; // false
-		param[2] = (tTVInteger)0; // false
+		param[1] = 0; // false
+		param[2] = 0; // false
 		param[3] = TJS_W(""); // error_mes
 		static ttstr eventname(TJS_W("onLoaded"));
 		TVPPostEvent(owner, owner, eventname, 0, TVP_EPT_IMMEDIATE, 4, param);

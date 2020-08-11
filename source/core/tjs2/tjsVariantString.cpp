@@ -531,12 +531,12 @@ tTVReal tTJSVariantString::ToReal() const
 //---------------------------------------------------------------------------
 void tTJSVariantString::ToNumber(tTJSVariant &dest) const
 {
-	if(!this) { dest = tTVInteger(0); return; }
+	if(!this) { dest = 0; return; }
 
 	const tjs_char *ptr = this->operator const tjs_char *();
 	if(TJSParseNumber(dest, &ptr)) return;
 
-	dest = tTVInteger(0);
+	dest = 0;
 }
 //---------------------------------------------------------------------------
 tTJSVariantString * tTJSVariantString::FixLength()

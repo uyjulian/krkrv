@@ -1349,7 +1349,7 @@ void TVPSaveAsTLG(void* formatdata, tTJSBinaryStream* dst, const iTVPBaseBitmap*
 				// hidden members are not processed
 				tjs_uint32 flags = (tjs_int)*param[1];
 				if(flags & TJS_HIDDENMEMBER) {
-					if(result) *result = (tTVInteger)1;
+					if(result) *result = (tjs_int)1;
 					return TJS_S_OK;
 				}
 				// push items
@@ -1357,7 +1357,7 @@ void TVPSaveAsTLG(void* formatdata, tTJSBinaryStream* dst, const iTVPBaseBitmap*
 				Tags.push_back( value.AsNarrowStdString() );
 				value = *param[2];
 				Tags.push_back( value.AsNarrowStdString() );
-				if(result) *result = (tTVInteger)1;
+				if(result) *result = (tjs_int)1;
 				return TJS_S_OK;
 			}
 		} callback(tags);

@@ -284,7 +284,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(volume)
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_MIDISoundBuffer);
 
-		*result = (tTVInteger)_this->GetVolume();
+		*result = _this->GetVolume();
 
 		return TJS_S_OK;
 	}
@@ -311,7 +311,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(volume2)
 #ifdef TVP_ENABLE_MIDI
         *result = _this->GetVolume2();
 #else
-        *result = (tTVInteger)0;
+        *result = 0;
 #endif
 
 		return TJS_S_OK;

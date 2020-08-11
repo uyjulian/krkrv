@@ -908,7 +908,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/getKeyState)
 
 	bool res = TVPGetAsyncKeyState(code, getcurrent);
 
-	if(result) *result = (tTVInteger)res;
+	if(result) *result = (tjs_int)res;
 	return TJS_S_OK;
 }
 TJS_END_NATIVE_STATIC_METHOD_DECL_OUTER(/*object to register*/cls,
@@ -925,7 +925,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/shellExecute)
 
 	bool res = TVPShellExecute(target, execparam);
 
-	if(result) *result = (tTVInteger)res;
+	if(result) *result = (tjs_int)res;
 	return TJS_S_OK;
 }
 TJS_END_NATIVE_STATIC_METHOD_DECL_OUTER(/*object to register*/cls,
@@ -945,7 +945,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/system)
 
 	TVPDeliverCompactEvent(TVP_COMPACT_LEVEL_MAX); // this should clear all caches
 
-	if(result) *result = (tTVInteger)ret;
+	if(result) *result = (tjs_int)ret;
 	return TJS_S_OK;
 }
 TJS_END_NATIVE_STATIC_METHOD_DECL_OUTER(/*object to register*/cls,
@@ -1005,7 +1005,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/createAppLock)
 
 	bool res = TVPCreateAppLock(lockname);
 
-	if(result) *result = (tTVInteger)res;
+	if(result) *result = (tjs_int)res;
 
 	return TJS_S_OK;
 }
@@ -1156,7 +1156,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(screenWidth)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)tTVPScreen::GetWidth();
+		*result = tTVPScreen::GetWidth();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1169,7 +1169,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(screenHeight)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)tTVPScreen::GetHeight();
+		*result = tTVPScreen::GetHeight();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1182,7 +1182,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(desktopLeft)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)tTVPScreen::GetDesktopLeft();
+		*result = tTVPScreen::GetDesktopLeft();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1195,7 +1195,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(desktopTop)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)tTVPScreen::GetDesktopTop();
+		*result = tTVPScreen::GetDesktopTop();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1208,7 +1208,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(desktopWidth)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)tTVPScreen::GetDesktopWidth();
+		*result = tTVPScreen::GetDesktopWidth();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1221,7 +1221,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(desktopHeight)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)tTVPScreen::GetDesktopHeight();
+		*result = tTVPScreen::GetDesktopHeight();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1234,7 +1234,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(touchDevice)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)TVPGetSupportTouchDevice();
+		*result = TVPGetSupportTouchDevice();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER

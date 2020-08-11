@@ -36,7 +36,7 @@ struct tListKeysCallback : public tTJSDispatch {
 		if( !( flags & TJS_HIDDENMEMBER ) ) {
 			Array->Add( ArrayNI, *param[0] );
 		}
-		if( result ) *result = (tTVInteger)1;
+		if( result ) *result = (tjs_int)1;
 		return TJS_S_OK;
 	}
 };
@@ -56,7 +56,7 @@ struct tListValuesCallback : public tTJSDispatch {
 		if( !( flags & TJS_HIDDENMEMBER ) ) {
 			Array->Add( ArrayNI, *param[2] );
 		}
-		if( result ) *result = (tTVInteger)1;
+		if( result ) *result = (tjs_int)1;
 		return TJS_S_OK;
 	}
 };
@@ -364,9 +364,9 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func.name*/getCount ) {
 		tjs_int ret = 0;
 		tjs_error hr = param[0]->AsObjectClosureNoAddRef().GetCount( &ret, nullptr, nullptr, nullptr );
 		if( TJS_SUCCEEDED( hr ) ) {
-			*result = (tTVInteger)ret;
+			*result = ret;
 		} else {
-			*result = (tTVInteger)0;
+			*result = 0;
 		}
 	}
 	return TJS_S_OK;
@@ -391,9 +391,9 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func.name*/contains ) {
 		if( result ) {
 			tTJSVariant tmp;
 			if( TJS_SUCCEEDED( objthis->PropGet( TJS_MEMBERMUSTEXIST, *( param[1]->AsStringNoAddRef() ), nullptr, &tmp, objthis ) ) ) {
-				*result = (tTVInteger)1;
+				*result = (tjs_int)1;
 			} else {
-				*result = (tTVInteger)0;
+				*result = (tjs_int)0;
 			}
 		}
 		return TJS_S_OK;
@@ -406,9 +406,9 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func.name*/contains ) {
 	if( result ) {
 		tTJSVariant tmp;
 		if( TJS_SUCCEEDED( disp->PropGet( TJS_MEMBERMUSTEXIST, *(param[1]->AsStringNoAddRef()), nullptr, &tmp, disp ) ) ) {
-			*result = (tTVInteger)1;
+			*result = (tjs_int)1;
 		} else {
-			*result = (tTVInteger)0;
+			*result = (tjs_int)0;
 		}
 	}
 	return TJS_S_OK;
@@ -624,14 +624,14 @@ tTJSDictionaryNI::tAssignCallback::FuncCall(tjs_uint32 flag,
 	tjs_uint32 flags = (tjs_int)*param[1];
 	if(flags & TJS_HIDDENMEMBER)
 	{
-		if(result) *result = (tTVInteger)1;
+		if(result) *result = (tjs_int)1;
 		return TJS_S_OK;
 	}
 
 	Owner->PropSetByVS(TJS_MEMBERENSURE|TJS_IGNOREPROP|flags,
 		param[0]->AsStringNoAddRef(), param[2], Owner);
 
-	if(result) *result = (tTVInteger)1;
+	if(result) *result = (tjs_int)1;
 	return TJS_S_OK;
 }
 //---------------------------------------------------------------------------
@@ -676,7 +676,7 @@ tjs_error TJS_INTF_METHOD tTJSDictionaryNI::tSaveStructCallback::FuncCall(
 	tjs_uint32 flags = (tjs_int)*param[1];
 	if(flags & TJS_HIDDENMEMBER)
 	{
-		if(result) *result = (tTVInteger)1;
+		if(result) *result = (tjs_int)1;
 		return TJS_S_OK;
 	}
 
@@ -707,7 +707,7 @@ tjs_error TJS_INTF_METHOD tTJSDictionaryNI::tSaveStructCallback::FuncCall(
 		Stream->Write(TJSVariantToExpressionString(*param[2]));
 	}
 
-	if(result) *result = (tTVInteger)1;
+	if(result) *result = (tjs_int)1;
 	return TJS_S_OK;
 }
 //---------------------------------------------------------------------------
@@ -738,7 +738,7 @@ tjs_error TJS_INTF_METHOD tTJSDictionaryNI::tSaveStructBinayCallback::FuncCall(
 	// hidden members are not processed
 	tjs_uint32 flags = (tjs_int)*param[1];
 	if(flags & TJS_HIDDENMEMBER) {
-		if(result) *result = (tTVInteger)1;
+		if(result) *result = (tjs_int)1;
 		return TJS_S_OK;
 	}
 
@@ -753,7 +753,7 @@ tjs_error TJS_INTF_METHOD tTJSDictionaryNI::tSaveStructBinayCallback::FuncCall(
 		tTJSBinarySerializer::PutVariant( Stream, *param[2] );
 	}
 
-	if(result) *result = (tTVInteger)1;
+	if(result) *result = (tjs_int)1;
 	return TJS_S_OK;
 }
 //---------------------------------------------------------------------------
@@ -767,11 +767,11 @@ tjs_error TJS_INTF_METHOD tTJSDictionaryNI::tSaveMemberCountCallback::FuncCall(
 	// hidden members are not processed
 	tjs_uint32 flags = (tjs_int)*param[1];
 	if(flags & TJS_HIDDENMEMBER) {
-		if(result) *result = (tTVInteger)1;
+		if(result) *result = (tjs_int)1;
 		return TJS_S_OK;
 	}
 	Count++;
-	if(result) *result = (tTVInteger)1;
+	if(result) *result = (tjs_int)1;
 	return TJS_S_OK;
 }
 //---------------------------------------------------------------------------
@@ -831,7 +831,7 @@ tjs_error TJS_INTF_METHOD tTJSDictionaryNI::tAssignStructCallback::FuncCall(
 	tjs_uint32 flags = (tjs_int)*param[1];
 	if(flags & TJS_HIDDENMEMBER)
 	{
-		if(result) *result = (tTVInteger)1;
+		if(result) *result = (tjs_int)1;
 		return TJS_S_OK;
 	}
 
@@ -928,7 +928,7 @@ tjs_error TJS_INTF_METHOD tTJSDictionaryNI::tAssignStructCallback::FuncCall(
 		Dest->PropSetByVS(TJS_MEMBERENSURE|TJS_IGNOREPROP, param[0]->AsStringNoAddRef(), &value, Dest);
 	}
 
-	if(result) *result = (tTVInteger)1;
+	if(result) *result = (tjs_int)1;
 	return TJS_S_OK;
 }
 //---------------------------------------------------------------------------

@@ -107,7 +107,7 @@ void TJS_INTF_METHOD tTJSNI_BitmapLayerTreeOwner::EndBitmapCompletion(iTVPLayerM
 
 void tTJSNI_BitmapLayerTreeOwner::OnSetMouseCursor( tjs_int cursor ) {
 	if( Owner ) {
-		tTJSVariant arg[1] = { (tTVInteger)cursor };
+		tTJSVariant arg[1] = { cursor };
 		static ttstr eventname(TJS_W("onSetMouseCursor"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 1, arg);
 	}
@@ -115,7 +115,7 @@ void tTJSNI_BitmapLayerTreeOwner::OnSetMouseCursor( tjs_int cursor ) {
 void tTJSNI_BitmapLayerTreeOwner::OnGetCursorPos(tjs_int &x, tjs_int &y) {
 	if( Owner ) {
 		tjs_int vx = x, vy = y;
-		tTJSVariant arg[2] = { (tTVInteger)vx, (tTVInteger)vy };
+		tTJSVariant arg[2] = { vx, vy };
 		static ttstr eventname(TJS_W("onGetCursorPos"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 2, arg);
 		x = arg[0];
@@ -124,7 +124,7 @@ void tTJSNI_BitmapLayerTreeOwner::OnGetCursorPos(tjs_int &x, tjs_int &y) {
 }
 void tTJSNI_BitmapLayerTreeOwner::OnSetCursorPos(tjs_int x, tjs_int y) {
 	if( Owner ) {
-		tTJSVariant arg[2] = { (tTVInteger)x, (tTVInteger)y };
+		tTJSVariant arg[2] = { x, y };
 		static ttstr eventname(TJS_W("onSetCursorPos"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 2, arg);
 	}
@@ -149,7 +149,7 @@ void tTJSNI_BitmapLayerTreeOwner::OnResizeLayer( tjs_int w, tjs_int h ) {
 		BitmapNI->SetSize( w, h ); // サイズ変更に応じて、内部のBitmapもサイズ変更する
 	}
 	if( Owner ) {
-		tTJSVariant arg[2] = { (tTVInteger)w, (tTVInteger)h };
+		tTJSVariant arg[2] = { w, h };
 		static ttstr eventname(TJS_W("onResizeLayer"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 2, arg);
 	}
@@ -165,7 +165,7 @@ void tTJSNI_BitmapLayerTreeOwner::OnSetAttentionPoint(tTJSNI_BaseLayer *layer, t
 	if( Owner ) {
 		iTJSDispatch2* owner = GetOwnerNoAddRef();
 		tTJSVariant clo(owner, owner);
-		tTJSVariant arg[3] = { clo, (tTVInteger)x, (tTVInteger)y };
+		tTJSVariant arg[3] = { clo, x, y };
 		static ttstr eventname(TJS_W("onSetAttentionPoint"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 3, arg);
 	}
@@ -178,7 +178,7 @@ void tTJSNI_BitmapLayerTreeOwner::OnDisableAttentionPoint() {
 }
 void tTJSNI_BitmapLayerTreeOwner::OnSetImeMode(tjs_int mode) {
 	if( Owner ) {
-		tTJSVariant arg[1] = { (tTVInteger)mode };
+		tTJSVariant arg[1] = { mode };
 		static ttstr eventname(TJS_W("onSetImeMode"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 1, arg);
 	}

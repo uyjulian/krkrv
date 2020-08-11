@@ -163,7 +163,7 @@ void tTJSNI_BaseVideoOverlay::FirePeriodEvent(tTVPPeriodEventReason reason)
 		if(CanDeliverEvents)
 		{
 			// fire onPeriod event
-			tTJSVariant param[1] = {(tTVInteger)reason};
+			tTJSVariant param[1] = {(tjs_int)reason};
 			static ttstr eventname(TJS_W("onPeriod"));
 			TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE,
 				1, param);
@@ -182,7 +182,7 @@ void tTJSNI_BaseVideoOverlay::FireFrameUpdateEvent( tjs_int frame )
 		if(CanDeliverEvents)
 		{
 			// fire onPeriod event
-			tTJSVariant param[1] = {(tTVInteger)frame};
+			tTJSVariant param[1] = {frame};
 			static ttstr eventname(TJS_W("onFrameUpdate"));
 			TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE,
 				1, param);
@@ -542,7 +542,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(left)
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_VideoOverlay);
 
-		*result = (tTVInteger)_this->GetLeft();
+		*result = _this->GetLeft();
 
 		return TJS_S_OK;
 	}
@@ -566,7 +566,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(top)
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_VideoOverlay);
 
-		*result = (tTVInteger)_this->GetTop();
+		*result = _this->GetTop();
 
 		return TJS_S_OK;
 	}
@@ -590,7 +590,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(width)
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_VideoOverlay);
 
-		*result = (tTVInteger)_this->GetWidth();
+		*result = _this->GetWidth();
 
 		return TJS_S_OK;
 	}
@@ -614,7 +614,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(height)
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_VideoOverlay);
 
-		*result = (tTVInteger)_this->GetHeight();
+		*result = _this->GetHeight();
 
 		return TJS_S_OK;
 	}
@@ -638,7 +638,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(originalWidth)
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_VideoOverlay);
 
-		*result = (tTVInteger)_this->GetOriginalWidth();
+		*result = _this->GetOriginalWidth();
 
 		return TJS_S_OK;
 	}
@@ -654,7 +654,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(originalHeight)
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_VideoOverlay);
 
-		*result = (tTVInteger)_this->GetOriginalHeight();
+		*result = _this->GetOriginalHeight();
 
 		return TJS_S_OK;
 	}
@@ -720,7 +720,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(frame)
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_VideoOverlay);
 
-		*result = (tTVInteger)_this->GetFrame();
+		*result = _this->GetFrame();
 
 		return TJS_S_OK;
 	}
@@ -760,7 +760,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(numberOfFrame)
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_VideoOverlay);
 
-		*result = (tTVInteger)_this->GetNumberOfFrame();
+		*result = _this->GetNumberOfFrame();
 
 		return TJS_S_OK;
 	}
@@ -879,7 +879,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(mode)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_VideoOverlay);
-		*result = (tTVInteger)_this->GetMode();
+		*result = (tjs_int)_this->GetMode();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -921,7 +921,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(segmentLoopStartFrame)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_VideoOverlay);
-		*result = (tTVInteger)_this->GetSegmentLoopStartFrame();
+		*result = (tjs_int)_this->GetSegmentLoopStartFrame();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -935,7 +935,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(segmentLoopEndFrame)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_VideoOverlay);
-		*result = (tTVInteger)_this->GetSegmentLoopEndFrame();
+		*result = (tjs_int)_this->GetSegmentLoopEndFrame();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -949,7 +949,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(periodEventFrame)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_VideoOverlay);
-		*result = (tTVInteger)_this->GetPeriodEventFrame();
+		*result = (tjs_int)_this->GetPeriodEventFrame();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -969,7 +969,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(audioBalance)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_VideoOverlay);
-		*result = (tTVInteger)_this->GetAudioBalance();
+		*result = (tjs_int)_this->GetAudioBalance();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -989,7 +989,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(audioVolume)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_VideoOverlay);
-		*result = (tTVInteger)_this->GetAudioVolume();
+		*result = (tjs_int)_this->GetAudioVolume();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1009,7 +1009,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(numberOfAudioStream)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_VideoOverlay);
-		*result = (tTVInteger)_this->GetNumberOfAudioStream();
+		*result = (tjs_int)_this->GetNumberOfAudioStream();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1023,7 +1023,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(enabledAudioStream)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_VideoOverlay);
-		*result = (tTVInteger)_this->GetEnabledAudioStream();
+		*result = (tjs_int)_this->GetEnabledAudioStream();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1043,7 +1043,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(numberOfVideoStream)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_VideoOverlay);
-		*result = (tTVInteger)_this->GetNumberOfVideoStream();
+		*result = (tjs_int)_this->GetNumberOfVideoStream();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1057,7 +1057,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(enabledVideoStream)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_VideoOverlay);
-		*result = (tTVInteger)_this->GetEnabledVideoStream();
+		*result = (tjs_int)_this->GetEnabledVideoStream();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1097,7 +1097,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(mixingMovieBGColor)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_VideoOverlay);
-		*result = (tTVInteger)_this->GetMixingMovieBGColor();
+		*result = (tjs_int)_this->GetMixingMovieBGColor();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER

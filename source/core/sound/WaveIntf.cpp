@@ -1405,7 +1405,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(volume)
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_BaseWaveSoundBuffer);
 
-		*result = (tTVInteger)_this->GetVolume();
+		*result = _this->GetVolume();
 
 		return TJS_S_OK;
 	}
@@ -1429,7 +1429,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(volume2)
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_BaseWaveSoundBuffer);
 
-		*result = (tTVInteger)_this->GetVolume2();
+		*result = _this->GetVolume2();
 
 		return TJS_S_OK;
 	}
@@ -1453,7 +1453,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(pan)
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_BaseWaveSoundBuffer);
 
-		*result = (tTVInteger)_this->GetPan();
+		*result = _this->GetPan();
 
 		return TJS_S_OK;
 	}
@@ -1565,7 +1565,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(frequency)
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_BaseWaveSoundBuffer);
 
-		*result = (tTVInteger)_this->GetFrequency();
+		*result = _this->GetFrequency();
 
 		return TJS_S_OK;
 	}
@@ -1589,7 +1589,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(bits) // not bitsPerSample
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_BaseWaveSoundBuffer);
 
-		*result = (tTVInteger)_this->GetBitsPerSample();
+		*result = _this->GetBitsPerSample();
 
 		return TJS_S_OK;
 	}
@@ -1605,7 +1605,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(channels)
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_BaseWaveSoundBuffer);
 
-		*result = (tTVInteger)_this->GetChannels();
+		*result = _this->GetChannels();
 
 		return TJS_S_OK;
 	}
@@ -1667,7 +1667,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(globalVolume)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)TVPGetGlobalVolume();
+		*result = TVPGetGlobalVolume();
 
 		return TJS_S_OK;
 	}
@@ -1687,7 +1687,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(globalFocusMode)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)TVPGetGlobalFocusMode();
+		*result = (tjs_int)TVPGetGlobalFocusMode();
 
 		return TJS_S_OK;
 	}
@@ -1803,7 +1803,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(count)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_WaveFlags);
-		*result = (tTVInteger)TVP_WL_MAX_FLAGS; // always this value
+		*result = TVP_WL_MAX_FLAGS; // always this value
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1820,7 +1820,7 @@ TJS_END_NATIVE_PROP_DECL(count)
 			TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_WaveFlags);              \
 			tTVPWaveLoopManager * manager =                                                          \
 				_this->GetBuffer()->GetWaveLoopManager(); /* note that the manager can be null */    \
-			if(manager) *result = (tTVInteger)manager->GetFlag(N); else *result = (tTVInteger)0;                    \
+			if(manager) *result = manager->GetFlag(N); else *result = (tjs_int)0;                    \
 			return TJS_S_OK;                                                                         \
 		}                                                                                            \
 		TJS_END_NATIVE_PROP_GETTER                                                                   \

@@ -2220,7 +2220,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(getTouchVelocity)
 	float x, y, speed;
 	bool ret = _this->GetTouchVelocity( id, x, y, speed );
 	if( result ) {
-		*result = ret ? (tTVInteger)1 : (tTVInteger)0;
+		*result = ret ? (tjs_int)1 : (tjs_int)0;
 	}
 	if( ret ) {
 		(*param[1]) = (tjs_real)x;
@@ -2244,7 +2244,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(getMouseVelocity)
 	float x, y, speed;
 	bool ret = _this->GetMouseVelocity( x, y, speed );
 	if( result ) {
-		*result = ret ? (tTVInteger)1 : (tTVInteger)0;
+		*result = ret ? (tjs_int)1 : (tjs_int)0;
 	}
 	if( ret ) {
 		(*param[0]) = (tjs_real)x;
@@ -2347,7 +2347,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(touchPointCount)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetTouchPointCount();
+		*result = _this->GetTouchPointCount();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -2361,7 +2361,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(hintDelay)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetHintDelay();
+		*result = _this->GetHintDelay();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -2381,7 +2381,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(enableTouch)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = _this->GetEnableTouch()?(tTVInteger)1:(tTVInteger)0;
+		*result = _this->GetEnableTouch()?1:0;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -2401,7 +2401,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(displayOrientation)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetDisplayOrientation();
+		*result = _this->GetDisplayOrientation();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -2415,7 +2415,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(displayRotate)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetDisplayRotate();
+		*result = _this->GetDisplayRotate();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER

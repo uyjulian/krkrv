@@ -93,7 +93,7 @@ tTJSDictionaryObject* tTJSBinarySerializer::CreateDictionary( tjs_uint count ) {
 		dsp->Release();
 	}
 	tTJSDictionaryObject* dic;
-	tTJSVariant param[1] = { tTVInteger(count) };
+	tTJSVariant param[1] = { (tjs_int)count };
 	tTJSVariant *pparam[1] = { param };
 	DicClass->CreateNew( 0, NULL,  NULL, (iTJSDispatch2**)&dic, 1, pparam, DicClass );
 	return dic;
@@ -134,9 +134,9 @@ tTJSVariant* tTJSBinarySerializer::ReadBasicType( const tjs_uint8* buff, const t
 	case TYPE_VOID:
 		return new tTJSVariant();
 	case TYPE_TRUE:
-		return new tTJSVariant((tTVInteger)1);
+		return new tTJSVariant((tjs_int)1);
 	case TYPE_FALSE:
-		return new tTJSVariant((tTVInteger)0);
+		return new tTJSVariant((tjs_int)0);
 	case TYPE_STRING8: {
 		if( (index+sizeof(tjs_uint8)) > size ) TJS_eTJSError( TJSReadError );
 		tjs_uint8 len = buff[index]; index++;
@@ -168,42 +168,42 @@ tTJSVariant* tTJSBinarySerializer::ReadBasicType( const tjs_uint8* buff, const t
 	case TYPE_UINT8: {
 			if( (index+sizeof(tjs_uint8)) > size ) TJS_eTJSError( TJSReadError );
 			tjs_uint8 t = buff[index]; index++;
-			return new tTJSVariant( (tTVInteger)t );
+			return new tTJSVariant( t );
 		}
 	case TYPE_UINT16: {
 			if( (index+sizeof(tjs_uint16)) > size ) TJS_eTJSError( TJSReadError );
 			tjs_uint16 t = Read16( buff, index );
-			return new tTJSVariant( (tTVInteger)t );
+			return new tTJSVariant( t );
 		}
 	case TYPE_UINT32: {
 			if( (index+sizeof(tjs_uint32)) > size ) TJS_eTJSError( TJSReadError );
 			tjs_uint32 t = Read32( buff, index );
-			return new tTJSVariant( (tTVInteger)(tjs_int64)t );
+			return new tTJSVariant( (tjs_int64)t );
 		}
 	case TYPE_UINT64: {
 			if( (index+sizeof(tjs_uint64)) > size ) TJS_eTJSError( TJSReadError );
 			tjs_uint64 t = Read64( buff, index );
-			return new tTJSVariant( (tTVInteger)(tjs_int64)t );
+			return new tTJSVariant( (tjs_int64)t );
 		}
 	case TYPE_INT8: {
 			if( (index+sizeof(tjs_uint8)) > size ) TJS_eTJSError( TJSReadError );
 			tjs_uint8 t = buff[index]; index++;
-			return new tTJSVariant( (tTVInteger)(tjs_int8)t );
+			return new tTJSVariant( (tjs_int8)t );
 		}
 	case TYPE_INT16: {
 			if( (index+sizeof(tjs_uint16)) > size ) TJS_eTJSError( TJSReadError );
 			tjs_uint16 t = Read16( buff, index );
-			return new tTJSVariant( (tTVInteger)(tjs_int16)t );
+			return new tTJSVariant( (tjs_int16)t );
 		}
 	case TYPE_INT32: {
 			if( (index+sizeof(tjs_uint32)) > size ) TJS_eTJSError( TJSReadError );
 			tjs_uint32 t = Read32( buff, index );
-			return new tTJSVariant( (tTVInteger)(tjs_int32)t );
+			return new tTJSVariant( (tjs_int32)t );
 		}
 	case TYPE_INT64: {
 			if( (index+sizeof(tjs_uint64)) > size ) TJS_eTJSError( TJSReadError );
 			tjs_uint64 t = Read64( buff, index );
-			return new tTJSVariant( (tTVInteger)(tjs_int64)t );
+			return new tTJSVariant( (tjs_int64)t );
 		}
 	case TYPE_RAW16: {
 		if( (index+sizeof(tjs_uint16)) > size ) TJS_eTJSError( TJSReadError );
@@ -240,10 +240,10 @@ tTJSVariant* tTJSBinarySerializer::ReadBasicType( const tjs_uint8* buff, const t
 	default: {
 		if( type >= TYPE_POSITIVE_FIX_NUM_MIN && type <= TYPE_POSITIVE_FIX_NUM_MAX ) {
 			tjs_int value = type;
-			return new tTJSVariant((tTVInteger)value);
+			return new tTJSVariant(value);
 		} else if( type >= TYPE_NEGATIVE_FIX_NUM_MIN && type <= TYPE_NEGATIVE_FIX_NUM_MAX ) {
 			tjs_int value = type;
-			return new tTJSVariant((tTVInteger)value);
+			return new tTJSVariant(value);
 		} else if( type >= TYPE_FIX_RAW_MIN && type <= TYPE_FIX_RAW_MAX ) { // octet
 			tjs_int len = type - TYPE_FIX_RAW_MIN;
 			if( (len*sizeof(tjs_uint8)+index) > size ) TJS_eTJSError( TJSReadError );

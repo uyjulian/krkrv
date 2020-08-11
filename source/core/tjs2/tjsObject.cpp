@@ -487,7 +487,7 @@ bool tTJSCustomObject::CallGetMissing(const tjs_char *name, tTJSVariant &result)
 		try
 		{
 			tTJSVariant args[3];
-			args[0] = (tTVInteger) false; // false: get
+			args[0] = (tjs_int) false; // false: get
 			args[1] = name;        // member name
 			args[2] = prop;
 			tTJSVariant *pargs[3] = {args +0, args +1, args +2};
@@ -534,7 +534,7 @@ bool tTJSCustomObject::CallSetMissing(const tjs_char *name, const tTJSVariant &v
 		try
 		{
 			tTJSVariant args[3];
-			args[0] = (tTVInteger) true; // true: set
+			args[0] = (tjs_int) true; // true: set
 			args[1] = name;        // member name
 			args[2] = prop;
 			tTJSVariant *pargs[3] = {args +0, args +1, args +2};
@@ -1189,7 +1189,7 @@ bool tTJSCustomObject::CallEnumCallbackForData(
 	if(data->SymFlags & TJS_SYMBOL_STATIC) newflags |= TJS_STATICMEMBER;
 
 	*params[0] = data->Name;
-	*params[1] = (tTVInteger)newflags;
+	*params[1] = (tjs_int)newflags;
 
 	if(!(flags & TJS_ENUM_NO_VALUE))
 	{

@@ -359,7 +359,7 @@ tTJSNativeClass::FuncCall(tjs_uint32 flag, const tjs_char * membername,
 					Dest->PropSet(TJS_MEMBERENSURE|TJS_IGNOREPROP|flags,
 					param[0]->GetString(), NULL, &val, Dest);
 			}
-			if(result) *result = (tTVInteger)(1); // returns true
+			if(result) *result = (tjs_int)(1); // returns true
 			return TJS_S_OK;
 		}
 	};

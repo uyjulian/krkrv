@@ -57,7 +57,7 @@ TJS_END_NATIVE_CONSTRUCTOR_DECL(/*TJS class name*/Rect)
 TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/isEmpty)
 {
 	TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Rect);
-	if(result) *result = (tTVInteger)( _this->IsEmpty() ? 1 : 0 );
+	if(result) *result = (tjs_int)( _this->IsEmpty() ? 1 : 0 );
 	return TJS_S_OK;
 }
 TJS_END_NATIVE_METHOD_DECL(/*func. name*/isEmpty)
@@ -117,7 +117,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/clip)
 			tTJSNC_Rect::ClassID, (iTJSNativeInstance**)&src)))
 			return TJS_E_INVALIDPARAM;
 		tjs_int ret = _this->Clip( *src ) ? 1 : 0;
-		if(result) *result = (tTVInteger)ret;
+		if(result) *result = ret;
 	}
 	return TJS_S_OK;
 }
@@ -134,7 +134,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/union)
 			tTJSNC_Rect::ClassID, (iTJSNativeInstance**)&src)))
 			return TJS_E_INVALIDPARAM;
 		tjs_int ret = _this->Union( *src ) ? 1 : 0;
-		if(result) *result = (tTVInteger)ret;
+		if(result) *result = ret;
 	}
 	return TJS_S_OK;
 }
@@ -151,7 +151,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/intersects)
 			tTJSNC_Rect::ClassID, (iTJSNativeInstance**)&src)))
 			return TJS_E_INVALIDPARAM;
 		tjs_int ret = _this->Intersects( *src ) ? 1 : 0;
-		if(result) *result = (tTVInteger)ret;
+		if(result) *result = ret;
 	}
 	return TJS_S_OK;
 }
@@ -168,7 +168,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/included)
 			tTJSNC_Rect::ClassID, (iTJSNativeInstance**)&src)))
 			return TJS_E_INVALIDPARAM;
 		tjs_int ret = _this->Included( *src ) ? 1 : 0;
-		if(result) *result = (tTVInteger)ret;
+		if(result) *result = ret;
 	}
 	return TJS_S_OK;
 }
@@ -179,7 +179,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/includedPos)
 	TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Rect);
 	if(numparams < 2) return TJS_E_BADPARAMCOUNT;
 	tjs_int ret = _this->Included( *param[0], *param[1] ) ? 1 : 0;
-	if(result) *result = (tTVInteger)ret;
+	if(result) *result = ret;
 	return TJS_S_OK;
 }
 TJS_END_NATIVE_METHOD_DECL(/*func. name*/includedPos)
@@ -195,7 +195,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/equal)
 			tTJSNC_Rect::ClassID, (iTJSNativeInstance**)&src)))
 			return TJS_E_INVALIDPARAM;
 		tjs_int ret = _this->Equal( *src ) ? 1 : 0;
-		if(result) *result = (tTVInteger)ret;
+		if(result) *result = ret;
 	}
 	return TJS_S_OK;
 }
@@ -211,7 +211,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(width)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Rect);
-		*result = (tTVInteger)_this->GetWidth();
+		*result = _this->GetWidth();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -231,7 +231,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(height)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Rect);
-		*result = (tTVInteger)_this->GetHeight();
+		*result = _this->GetHeight();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -251,7 +251,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(left)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Rect);
-		*result = (tTVInteger)_this->Get().left;
+		*result = _this->Get().left;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -271,7 +271,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(top)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Rect);
-		*result = (tTVInteger)_this->Get().top;
+		*result = _this->Get().top;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -291,7 +291,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(right)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Rect);
-		*result = (tTVInteger)_this->Get().right;
+		*result = _this->Get().right;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -311,7 +311,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(bottom)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Rect);
-		*result = (tTVInteger)_this->Get().bottom;
+		*result = _this->Get().bottom;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -361,7 +361,7 @@ iTJSDispatch2 * TVPCreateRectObject( tjs_int left, tjs_int top, tjs_int right, t
 	} static rectclass;
 
 	iTJSDispatch2 *out;
-	tTJSVariant param[4] = { (tTVInteger)left, (tTVInteger)top, (tTVInteger)right, (tTVInteger)bottom};
+	tTJSVariant param[4] = { left, top, right, bottom};
 	tTJSVariant *pparam[4] = { param, param+1, param+2, param+3 };
 	tjs_error hr = rectclass.Obj->CreateNew(0, NULL, NULL, &out, 4, pparam, rectclass.Obj);
 	if(TJS_FAILED(hr)) TVPThrowInternalError;

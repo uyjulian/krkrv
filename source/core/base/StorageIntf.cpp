@@ -1577,7 +1577,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/isExistentStorage)
 	ttstr path = *param[0];
 
 	if(result)
-		*result = (tTVInteger)TVPIsExistentStorage(path);
+		*result = (tjs_int)TVPIsExistentStorage(path);
 
 	return TJS_S_OK;
 }

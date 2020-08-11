@@ -649,11 +649,11 @@ void TVPLoadHeaderTLG(void* formatdata, tTJSBinaryStream *src, iTJSDispatch2** d
 	}
 	tjs_int bpp = colors * 8;
 	*dic = TJSCreateDictionaryObject();
-	tTJSVariant val((tTVInteger)width);
+	tTJSVariant val(width);
 	(*dic)->PropSet(TJS_MEMBERENSURE, TJS_W("width"), 0, &val, (*dic) );
-	val = tTJSVariant((tTVInteger)height);
+	val = tTJSVariant(height);
 	(*dic)->PropSet(TJS_MEMBERENSURE, TJS_W("height"), 0, &val, (*dic) );
-	val = tTJSVariant((tTVInteger)bpp);
+	val = tTJSVariant(bpp);
 	(*dic)->PropSet(TJS_MEMBERENSURE, TJS_W("bpp"), 0, &val, (*dic) );
 }
 //---------------------------------------------------------------------------

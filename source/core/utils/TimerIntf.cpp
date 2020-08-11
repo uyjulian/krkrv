@@ -239,7 +239,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(capacity)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Timer);
-		*result = (tTVInteger)_this->GetCapacity();
+		*result = _this->GetCapacity();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -259,7 +259,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(mode)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Timer);
-		*result = (tTVInteger)_this->GetMode();
+		*result = (tjs_int)_this->GetMode();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER

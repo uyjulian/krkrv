@@ -616,12 +616,12 @@ static bool TJSParseNumber2(tTJSVariant &val, const tjs_char **ptr)
 
 	if(TJSStringMatch(ptr, TJS_W("true"), true))
 	{
-		val = (tTVInteger)true;
+		val = (tjs_int)true;
 		return true;
 	}
 	if(TJSStringMatch(ptr, TJS_W("false"), true))
 	{
-		val = (tTVInteger)false;
+		val = (tjs_int)false;
 		return true;
 	}
 	if(TJSStringMatch(ptr, TJS_W("NaN"), true))
@@ -647,7 +647,7 @@ static bool TJSParseNumber2(tTJSVariant &val, const tjs_char **ptr)
 	{
 		if(!TJSNext(ptr))
 		{
-			val = (tTVInteger) 0;
+			val = (tjs_int) 0;
 			return true;
 		}
 
@@ -945,7 +945,7 @@ void TJSReservedWordsHashRelease()
 //---------------------------------------------------------------------------
 static void TJSRegisterReservedWordsHash(const tjs_char *word, tjs_int num)
 {
-	tTJSVariant val((tTVInteger)num);
+	tTJSVariant val(num);
 	TJSReservedWordHash->PropSet(TJS_MEMBERENSURE, word, NULL, &val,
 		TJSReservedWordHash);
 }

@@ -1051,7 +1051,7 @@ void tTJSVariant::tonumber()
 		return;
 	}
 
-	if(vt==tvtVoid) { *this = tTVInteger(0); return; }
+	if(vt==tvtVoid) { *this = 0; return; }
 
 	TJSThrowVariantConvertError(*this, tvtInteger, tvtReal);
 }

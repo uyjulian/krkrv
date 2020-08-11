@@ -187,10 +187,10 @@ iTJSDispatch2 * tTJSNI_RandomGenerator::Serialize()
 		val = state;
 		dic->PropSet(TJS_MEMBERENSURE, TJS_W("state"), NULL, &val, dic);
 
-		val = (tTVInteger)data.left;
+		val = (tjs_int)data.left;
 		dic->PropSet(TJS_MEMBERENSURE, TJS_W("left"), NULL, &val, dic);
 
-		val = (tTVInteger)(data.next - data.state);
+		val = (tjs_int)(data.next - data.state);
 		dic->PropSet(TJS_MEMBERENSURE, TJS_W("next"), NULL, &val, dic);
 	}
 	catch(...)

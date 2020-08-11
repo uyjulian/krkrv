@@ -3628,7 +3628,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/getVisBuffer)
 
 	tjs_int res = _this->GetVisBuffer(dest, *param[1], *param[2], ahead);
 
-	if(result) *result = (tTVInteger)res;
+	if(result) *result = res;
 
 	return TJS_S_OK;
 }

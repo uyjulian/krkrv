@@ -158,7 +158,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/toActualColor)
 	{
 		tjs_uint32 color = (tjs_int)(*param[0]);
 		color = TVPToActualColor(color);
-		*result = (tTVInteger)color;
+		*result = (tjs_int)color;
 	}
 
 	return TJS_S_OK;
@@ -246,7 +246,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/assignMessage)
 
 	bool res = TJSAssignMessage(id.c_str(), msg.c_str());
 
-	if(result) *result = tTJSVariant((tTVInteger)res);
+	if(result) *result = tTJSVariant((tjs_int)res);
 
 	return TJS_S_OK;
 }
@@ -319,7 +319,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(graphicCacheLimit)
 {
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
-		*result = (tTVInteger)TVPGetGraphicCacheLimit();
+		*result = (tjs_int)TVPGetGraphicCacheLimit();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -381,7 +381,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(drawThreadNum)
 {
         TJS_BEGIN_NATIVE_PROP_GETTER
           {
-            *result = (tTVInteger)TVPDrawThreadNum;
+            *result = TVPDrawThreadNum;
             return TJS_S_OK;
           }
         TJS_END_NATIVE_PROP_GETTER
@@ -398,7 +398,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(processorNum)
 {
         TJS_BEGIN_NATIVE_PROP_GETTER
           {
-            *result = (tTVInteger)TVPGetProcessorNum();
+            *result = TVPGetProcessorNum();
             return TJS_S_OK;
           }
         TJS_END_NATIVE_PROP_GETTER
@@ -411,9 +411,9 @@ TJS_BEGIN_NATIVE_PROP_DECL(exeBits)
         TJS_BEGIN_NATIVE_PROP_GETTER
           {
 #ifdef TJS_64BIT_OS
-            *result = (tTVInteger)64;
+            *result = 64;
 #else
-            *result = (tTVInteger)32;
+            *result = 32;
 #endif
             return TJS_S_OK;
           }
@@ -426,7 +426,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(osBits)
 {
         TJS_BEGIN_NATIVE_PROP_GETTER
           {
-          	*result = (tTVInteger)TVPGetOSBits();
+          	*result = TVPGetOSBits();
             return TJS_S_OK;
           }
         TJS_END_NATIVE_PROP_GETTER
@@ -454,9 +454,9 @@ TJS_END_NATIVE_STATIC_PROP_DECL(exitOnNoWindowStartup)
 TJS_BEGIN_NATIVE_PROP_DECL(isWindows) {
 	TJS_BEGIN_NATIVE_PROP_GETTER {
 #ifdef WIN32
-		*result = (tTVInteger)1;
+		*result = (tjs_int)1;
 #else
-		*result = (tTVInteger)0;
+		*result = (tjs_int)0;
 #endif
 		return TJS_S_OK;
 	}
@@ -468,9 +468,9 @@ TJS_END_NATIVE_STATIC_PROP_DECL(isWindows)
 TJS_BEGIN_NATIVE_PROP_DECL(isAndroid) {
 	TJS_BEGIN_NATIVE_PROP_GETTER {
 #ifdef ANDROID
-		*result = (tTVInteger)1;
+		*result = (tjs_int)1;
 #else
-		*result = (tTVInteger)0;
+		*result = (tjs_int)0;
 #endif
 		return TJS_S_OK;
 	}

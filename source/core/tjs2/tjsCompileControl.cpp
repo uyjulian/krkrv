@@ -52,7 +52,7 @@ tjs_int32 tTJSPPExprParser::Parse()
 	return Result;
 }
 //---------------------------------------------------------------------------
-tjs_int tTJSPPExprParser::GetNext(tjs_int &value)
+tjs_int tTJSPPExprParser::GetNext(tjs_int32 &value)
 {
 	// get next token
 
@@ -179,7 +179,7 @@ const tjs_char * tTJSPPExprParser::GetString(tjs_int idx) const
 //---------------------------------------------------------------------------
 int pplex(YYSTYPE *yylex, void *pm)
 {
-	tjs_int val;
+	tjs_int32 val;
 	tjs_int n;
 	n = ((tTJSPPExprParser*)pm)->GetNext(val);
 	if(n == PT_NUM) yylex->val = val;

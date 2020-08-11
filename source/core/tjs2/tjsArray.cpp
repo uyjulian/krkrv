@@ -815,7 +815,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/* func.name */remove)
 
 	tjs_int count = ((tTJSArrayObject*)objthis)->Remove(ni, val, eraseall);
 
-	if(result) *result = (tTVInteger)count;
+	if(result) *result = count;
 
 	return TJS_S_OK;
 }
@@ -847,7 +847,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/* func.name */add)
 
 	((tTJSArrayObject*)objthis)->Add(ni, *param[0]);
 
-	if(result) *result = (tTVInteger)((signed)ni->Items.size() -1);
+	if(result) *result = (signed)ni->Items.size() -1;
 
 	return TJS_S_OK;
 }
@@ -936,7 +936,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/* func.name */find)
 		if(numparams >= 2) start = *param[1];
 		if(start < 0) start += (tjs_int)ni->Items.size();
 		if(start < 0) start = 0;
-		if(start >= (tjs_int)ni->Items.size()) { *result = (tTVInteger)(-1); return TJS_S_OK; }
+		if(start >= (tjs_int)ni->Items.size()) { *result = -1; return TJS_S_OK; }
 
 		tTJSArrayNI::tArrayItemIterator i;
 		for(i = ni->Items.begin() + start; i != ni->Items.end(); i++)
@@ -944,7 +944,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/* func.name */find)
 			if(val.DiscernCompare(*i)) break;
 		}
 		if(i == ni->Items.end())
-			*result = (tTVInteger)(-1);
+			*result = -1;
 		else
 			*result = (tTVInteger)(i - ni->Items.begin());
 	}
@@ -1007,7 +1007,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/* func.name */forEach ) {
 		tTJSVariant breakResult;
 		tjs_int count = ni->Items.size();
 		for( tjs_int i = 0; i < count; i++ ) {
-			key = (tTVInteger)i;
+			key = i;
 			value = ni->Items[i];
 			tjs_error hr = func->FuncCall( 0, nullptr, nullptr, &breakResult, paramCount, paramList.get(), functhis );
 			if( TJS_FAILED( hr ) ) {
@@ -1039,16 +1039,16 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/* func.name */includes ) {
 		if( numparams >= 2 ) start = *param[1];
 		if( start < 0 ) start += (tjs_int)ni->Items.size();
 		if( start < 0 ) start = 0;
-		if( start >= (tjs_int)ni->Items.size() ) { *result = (tTVInteger)0; return TJS_S_OK; }
+		if( start >= (tjs_int)ni->Items.size() ) { *result = (tjs_int)0; return TJS_S_OK; }
 
 		tTJSArrayNI::tArrayItemIterator i;
 		for( i = ni->Items.begin() + start; i != ni->Items.end(); i++ ) {
 			if( val.DiscernCompare( *i ) ) break;
 		}
 		if( i == ni->Items.end() )
-			*result = (tTVInteger)0;
+			*result = (tjs_int)0;
 		else
-			*result = (tTVInteger)1;
+			*result = (tjs_int)1;
 	}
 	return TJS_S_OK;
 }
@@ -1177,7 +1177,7 @@ tjs_error TJS_INTF_METHOD tTJSArrayNI::tDictionaryEnumCallback::FuncCall(
 	tjs_uint32 flags = (tjs_int)*param[1];
 	if(flags & TJS_HIDDENMEMBER)
 	{
-		if(result) *result = (tTVInteger)1;
+		if(result) *result = (tjs_int)1;
 		return TJS_S_OK;
 	}
 
@@ -1186,7 +1186,7 @@ tjs_error TJS_INTF_METHOD tTJSArrayNI::tDictionaryEnumCallback::FuncCall(
 	Items->push_back(*param[0]);
 	Items->push_back(*param[2]);
 
-	if(result) *result = (tTVInteger)1;
+	if(result) *result = (tjs_int)1;
 	return TJS_S_OK;
 }
 //---------------------------------------------------------------------------

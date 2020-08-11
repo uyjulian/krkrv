@@ -1002,13 +1002,13 @@ void TVPLoadHeaderBMP( void* formatdata, tTJSBinaryStream *src, iTJSDispatch2** 
 	palsize = palsize > 0 ? 1 : 0;
 
 	*dic = TJSCreateDictionaryObject();
-	tTJSVariant val((tTVInteger)bi.biWidth);
+	tTJSVariant val(bi.biWidth);
 	(*dic)->PropSet(TJS_MEMBERENSURE, TJS_W("width"), 0, &val, (*dic) );
-	val = tTJSVariant((tTVInteger)bi.biHeight);
+	val = tTJSVariant(bi.biHeight);
 	(*dic)->PropSet(TJS_MEMBERENSURE, TJS_W("height"), 0, &val, (*dic) );
-	val = tTJSVariant((tTVInteger)bi.biBitCount);
+	val = tTJSVariant(bi.biBitCount);
 	(*dic)->PropSet(TJS_MEMBERENSURE, TJS_W("bpp"), 0, &val, (*dic) );
-	val = tTJSVariant((tTVInteger)palsize);
+	val = tTJSVariant(palsize);
 	(*dic)->PropSet(TJS_MEMBERENSURE, TJS_W("palette"), 0, &val, (*dic) );
 }
 

@@ -875,7 +875,7 @@ public:
 	{
 		switch(vt)
 		{
-		case tvtVoid:    targ = (tTVInteger)0; return;
+		case tvtVoid:    targ = (tjs_int)0; return;
 		case tvtObject:  TJSThrowVariantConvertError(*this, tvtInteger, tvtReal);
 		case tvtString:  String->ToNumber(targ); return;
 		case tvtInteger: targ = Integer; return;
@@ -1105,7 +1105,7 @@ public:
 
 	TJS_CONST_METHOD_DEF(tTJSVariant, operator !, ())
 	{
-		return (tTVInteger)!operator bool();
+		return (tjs_int)!operator bool();
 	}
 
 	TJS_METHOD_DEF(void, bitnot, ());
@@ -1135,7 +1135,7 @@ public:
 			return val;
 		}
 
-		if(vt==tvtVoid) return (tTVInteger)0;
+		if(vt==tvtVoid) return 0;
 
 		TJSThrowVariantConvertError(*this, tvtInteger, tvtReal);
 		return tTJSVariant();

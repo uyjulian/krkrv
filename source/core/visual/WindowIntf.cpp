@@ -324,7 +324,7 @@ void tTJSNI_BaseWindow::OnClick(tjs_int x, tjs_int y)
 	if(!CanDeliverEvents()) return;
 	if(Owner)
 	{
-		tTJSVariant arg[2] = { (tTVInteger)x, (tTVInteger)y };
+		tTJSVariant arg[2] = { x, y };
 		static ttstr eventname(TJS_W("onClick"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 2, arg);
 	}
@@ -336,7 +336,7 @@ void tTJSNI_BaseWindow::OnDoubleClick(tjs_int x, tjs_int y)
 	if(!CanDeliverEvents()) return;
 	if(Owner)
 	{
-		tTJSVariant arg[2] = { (tTVInteger)x, (tTVInteger)y };
+		tTJSVariant arg[2] = { x, y };
 		static ttstr eventname(TJS_W("onDoubleClick"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 2, arg);
 	}
@@ -349,7 +349,7 @@ void tTJSNI_BaseWindow::OnMouseDown(tjs_int x, tjs_int y, tTVPMouseButton mb,
 	if(!CanDeliverEvents()) return;
 	if(Owner)
 	{
-		tTJSVariant arg[4] = { (tTVInteger)x, (tTVInteger)y, (tjs_int64)mb, (tjs_int64)flags };
+		tTJSVariant arg[4] = { x, y, (tjs_int64)mb, (tjs_int64)flags };
 		static ttstr eventname(TJS_W("onMouseDown"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 4, arg);
 	}
@@ -362,7 +362,7 @@ void tTJSNI_BaseWindow::OnMouseUp(tjs_int x, tjs_int y, tTVPMouseButton mb,
 	if(!CanDeliverEvents()) return;
 	if(Owner)
 	{
-		tTJSVariant arg[4] = { (tTVInteger)x, (tTVInteger)y, (tTVInteger)mb, (tTVInteger)flags };
+		tTJSVariant arg[4] = { x, y, (tjs_int)mb, (tjs_int)flags };
 		static ttstr eventname(TJS_W("onMouseUp"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 4, arg);
 	}
@@ -375,7 +375,7 @@ void tTJSNI_BaseWindow::OnMouseMove(tjs_int x, tjs_int y, tjs_uint32 flags)
 	if(Owner)
 	{
 		static ttstr eventname(TJS_W("onMouseMove"));
-			tTJSVariant arg[3] = { (tTVInteger)x, (tTVInteger)y, (tjs_int64)flags };
+			tTJSVariant arg[3] = { x, y, (tjs_int64)flags };
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_DISCARDABLE|TVP_EPT_IMMEDIATE
 			/*discardable!!*/,
 			3, arg);
@@ -420,7 +420,7 @@ void tTJSNI_BaseWindow::OnTouchScaling( tjs_real startdist, tjs_real curdist, tj
 	if(!CanDeliverEvents()) return;
 	if(Owner)
 	{
-		tTJSVariant arg[5] = { startdist, curdist, cx, cy, (tTVInteger)flag };
+		tTJSVariant arg[5] = { startdist, curdist, cx, cy, flag };
 		static ttstr eventname(TJS_W("onTouchScaling"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 5, arg);
 	}
@@ -431,7 +431,7 @@ void tTJSNI_BaseWindow::OnTouchRotate( tjs_real startangle, tjs_real curangle, t
 	if(!CanDeliverEvents()) return;
 	if(Owner)
 	{
-		tTJSVariant arg[6] = { startangle, curangle, dist, cx, cy, (tTVInteger)flag };
+		tTJSVariant arg[6] = { startangle, curangle, dist, cx, cy, flag };
 		static ttstr eventname(TJS_W("onTouchRotate"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 6, arg);
 	}
@@ -485,7 +485,7 @@ void tTJSNI_BaseWindow::OnKeyDown(tjs_uint key, tjs_uint32 shift)
 	if(!CanDeliverEvents()) return;
 	if(Owner)
 	{
-		tTJSVariant arg[2] = { (tTVInteger)key, (tTVInteger)shift };
+		tTJSVariant arg[2] = { (tjs_int)key, (tjs_int)shift };
 		static ttstr eventname(TJS_W("onKeyDown"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 2, arg);
 	}
@@ -497,7 +497,7 @@ void tTJSNI_BaseWindow::OnKeyUp(tjs_uint key, tjs_uint32 shift)
 	if(!CanDeliverEvents()) return;
 	if(Owner)
 	{
-		tTJSVariant arg[2] = { (tTVInteger)key, (tTVInteger)shift };
+		tTJSVariant arg[2] = { (tjs_int)key, (tjs_int)shift };
 		static ttstr eventname(TJS_W("onKeyUp"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 2, arg);
 	}
@@ -536,7 +536,7 @@ void tTJSNI_BaseWindow::OnMouseWheel(tjs_uint32 shift, tjs_int delta,
 	if(!CanDeliverEvents()) return;
 	if(Owner)
 	{
-		tTJSVariant arg[4] = { (tTVInteger)shift, (tTVInteger)delta, (tTVInteger)x, (tTVInteger)y };
+		tTJSVariant arg[4] = { (tjs_int)shift, delta, x, y };
 		static ttstr eventname(TJS_W("onMouseWheel"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 4, arg);
 	}
@@ -575,7 +575,7 @@ void tTJSNI_BaseWindow::OnHintChange( const ttstr& text, tjs_int x, tjs_int y, b
 	if(!CanDeliverEvents()) return;
 	if(Owner)
 	{
-		tTJSVariant arg[6] = { text, (tTVInteger)x, (tTVInteger)y, (tTVInteger)(isshow ? 1 : 0) };
+		tTJSVariant arg[6] = { text, x, y, isshow ? 1 : 0 };
 		static ttstr eventname(TJS_W("onHintChanged"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 4, arg);
 	}
@@ -585,7 +585,7 @@ void tTJSNI_BaseWindow::OnDisplayRotate( tjs_int orientation, tjs_int rotate, tj
 	if(!CanDeliverEvents()) return;
 	if(Owner)
 	{
-		tTJSVariant arg[5] = { (tTVInteger)orientation, (tTVInteger)rotate, (tTVInteger)bpp, (tTVInteger)hresolution, (tTVInteger)vresolution };
+		tTJSVariant arg[5] = { orientation, rotate, bpp, hresolution, vresolution };
 		static ttstr eventname(TJS_W("onDisplayRotate"));
 		TVPPostEvent(Owner, Owner, eventname, 0, TVP_EPT_IMMEDIATE, 5, arg);
 	}
@@ -1314,7 +1314,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(width)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetWidth();
+		*result = _this->GetWidth();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1334,7 +1334,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(height)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetHeight();
+		*result = _this->GetHeight();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1354,7 +1354,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(minWidth)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetMinWidth();
+		*result = _this->GetMinWidth();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1374,7 +1374,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(minHeight)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetMinHeight();
+		*result = _this->GetMinHeight();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1394,7 +1394,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(maxWidth)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetMaxWidth();
+		*result = _this->GetMaxWidth();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1414,7 +1414,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(maxHeight)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetMaxHeight();
+		*result = _this->GetMaxHeight();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1434,7 +1434,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(left)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetLeft();
+		*result = _this->GetLeft();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1454,7 +1454,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(top)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetTop();
+		*result = _this->GetTop();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1474,7 +1474,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(focusable)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger) _this->GetFocusable();
+		*result = (tjs_int) _this->GetFocusable();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1495,7 +1495,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(layerLeft)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetLayerLeft();
+		*result = _this->GetLayerLeft();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1515,7 +1515,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(layerTop)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetLayerTop();
+		*result = _this->GetLayerTop();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1556,7 +1556,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(innerWidth)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetInnerWidth();
+		*result = _this->GetInnerWidth();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1576,7 +1576,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(innerHeight)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetInnerHeight();
+		*result = _this->GetInnerHeight();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1596,7 +1596,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(zoomNumer)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetZoomNumer();
+		*result = _this->GetZoomNumer();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1616,7 +1616,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(zoomDenom)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetZoomDenom();
+		*result = _this->GetZoomDenom();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1636,7 +1636,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(borderStyle)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetBorderStyle();
+		*result = (tjs_int)_this->GetBorderStyle();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1738,7 +1738,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(imeMode) // not defaultImeMode
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetDefaultImeMode();
+		*result = (tjs_int)_this->GetDefaultImeMode();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1758,7 +1758,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(mouseCursorState)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)_this->GetMouseCursorState();
+		*result = (tjs_int)_this->GetMouseCursorState();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -1878,7 +1878,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(waitVSync)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Window);
-		*result = (tTVInteger)(_this->GetWaitVSync() ? 1 : 0);
+		*result = _this->GetWaitVSync() ? 1 : 0;
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER

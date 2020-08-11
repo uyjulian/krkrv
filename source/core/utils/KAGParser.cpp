@@ -566,7 +566,7 @@ iTJSDispatch2 *tTJSNI_KAGParser::Store()
 				val = i->Label;
 				dic->PropSet(TJS_MEMBERENSURE, TJS_W("label"), NULL,
 					&val, dic);
-				val = (tTVInteger)i->Offset;
+				val = i->Offset;
 				dic->PropSet(TJS_MEMBERENSURE, TJS_W("offset"), NULL,
 					&val, dic);
 				val = i->OrgLineStr;
@@ -575,22 +575,22 @@ iTJSDispatch2 *tTJSNI_KAGParser::Store()
 				val = i->LineBuffer;
 				dic->PropSet(TJS_MEMBERENSURE, TJS_W("lineBuffer"), NULL,
 					&val, dic);
-				val = (tTVInteger)i->Pos;
+				val = i->Pos;
 				dic->PropSet(TJS_MEMBERENSURE, TJS_W("pos"), NULL,
 					&val, dic);
-				val = (tTVInteger)i->LineBufferUsing;
+				val = (tjs_int)i->LineBufferUsing;
 				dic->PropSet(TJS_MEMBERENSURE, TJS_W("lineBufferUsing"), NULL,
 					&val, dic);
-				val = (tTVInteger)i->MacroArgStackBase;
+				val = (tjs_int)i->MacroArgStackBase;
 				dic->PropSet(TJS_MEMBERENSURE, TJS_W("macroArgStackBase"), NULL,
 					&val, dic);
-				val = (tTVInteger)i->MacroArgStackDepth;
+				val = (tjs_int)i->MacroArgStackDepth;
 				dic->PropSet(TJS_MEMBERENSURE, TJS_W("macroArgStackDepth"), NULL,
 					&val, dic);
-				val = (tTVInteger)i->ExcludeLevel;
+				val = i->ExcludeLevel;
 				dic->PropSet(TJS_MEMBERENSURE, TJS_W("ExcludeLevel"), NULL,
 					&val, dic);
-				val = (tTVInteger)i->IfLevel;
+				val = (tjs_int)i->IfLevel;
 				dic->PropSet(TJS_MEMBERENSURE, TJS_W("IfLevel"), NULL,
 					&val, dic);
                 
@@ -610,10 +610,10 @@ iTJSDispatch2 *tTJSNI_KAGParser::Store()
 		// ( Lines and LineCount are not stored )
 
 		// store CurStorage, CurLine, CurPos
-		val = (tTVInteger)CurLine;
+		val = CurLine;
 		dic->PropSet(TJS_MEMBERENSURE, TJS_W("curLine"), NULL,
 			&val, dic);
-		val = (tTVInteger)CurPos;
+		val = CurPos;
 		dic->PropSet(TJS_MEMBERENSURE, TJS_W("curPos"), NULL,
 			&val, dic);
 
@@ -623,7 +623,7 @@ iTJSDispatch2 *tTJSNI_KAGParser::Store()
 		val = LineBuffer;
 		dic->PropSet(TJS_MEMBERENSURE, TJS_W("lineBuffer"), NULL,
 			&val, dic);
-		val = (tTVInteger)LineBufferUsing;
+		val = (tjs_int)LineBufferUsing;
 		dic->PropSet(TJS_MEMBERENSURE, TJS_W("lineBufferUsing"), NULL,
 			&val, dic);
 
@@ -638,19 +638,19 @@ iTJSDispatch2 *tTJSNI_KAGParser::Store()
 
 
 		// ExcludeLevel, IfLevel, ExcludeLevelStack, IfLevelExecutedStack
-		val = (tTVInteger)ExcludeLevel;
+		val = ExcludeLevel;
 		dic->PropSet(TJS_MEMBERENSURE, TJS_W("ExcludeLevel"), NULL, &val, dic);
-		val = (tTVInteger)IfLevel;
+		val = IfLevel;
 		dic->PropSet(TJS_MEMBERENSURE, TJS_W("IfLevel"), NULL, &val, dic);
 		StoreIntStackToDic(dic, ExcludeLevelStack, TJS_W("ExcludeLevelStack"));
 		StoreBoolStackToDic(dic, IfLevelExecutedStack, TJS_W("IfLevelExecutedStack"));
 
 		// store MacroArgStackBase, MacroArgStackDepth
-		val = (tTVInteger)MacroArgStackBase;
+		val = (tjs_int)MacroArgStackBase;
 		dic->PropSet(TJS_MEMBERENSURE, TJS_W("macroArgStackBase"), NULL,
 			&val, dic);
 
-		val = (tTVInteger)MacroArgStackDepth;
+		val = (tjs_int)MacroArgStackDepth;
 		dic->PropSet(TJS_MEMBERENSURE, TJS_W("macroArgStackDepth"), NULL,
 			&val, dic);
 
@@ -1185,7 +1185,7 @@ bool tTJSNI_KAGParser::SkipCommentOrLabel()
 			{
 				if(Owner)
 				{
-					tTJSVariant param[3] = {script, StorageShortName, (tTVInteger)script_start};
+					tTJSVariant param[3] = {script, StorageShortName, script_start};
 					tTJSVariant *pparam[3] = { param, param+1, param+2 };
 					static ttstr onScript_name(TJSMapGlobalStringMap(TJS_W("onScript")));
 					Owner->FuncCall(0, onScript_name.c_str(), onScript_name.GetHint(),
@@ -2454,7 +2454,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(curLine)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_KAGParser);
-		*result = (tTVInteger)_this->GetCurLine();
+		*result = _this->GetCurLine();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -2468,7 +2468,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(curPos)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_KAGParser);
-		*result = (tTVInteger)_this->GetCurPos();
+		*result = _this->GetCurPos();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -2496,7 +2496,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(processSpecialTags)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_KAGParser);
-		*result = (tTVInteger)_this->GetProcessSpecialTags();
+		*result = (tjs_int)_this->GetProcessSpecialTags();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -2516,7 +2516,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(ignoreCR)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_KAGParser);
-		*result = (tTVInteger)_this->GetIgnoreCR();
+		*result = (tjs_int)_this->GetIgnoreCR();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -2536,7 +2536,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(debugLevel)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_KAGParser);
-		*result = (tTVInteger)_this->GetDebugLevel();
+		*result = (tjs_int)_this->GetDebugLevel();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -2601,7 +2601,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(callStackDepth)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_KAGParser);
-		*result = (tTVInteger)_this->GetCallStackDepth();
+		*result = _this->GetCallStackDepth();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER

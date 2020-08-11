@@ -227,7 +227,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/getMaskPixel)
 {
 	TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Bitmap);
 	if(numparams < 2) return TJS_E_BADPARAMCOUNT;
-	if(result) *result = (tTVInteger)_this->GetMaskPixel(*param[0], *param[1]);
+	if(result) *result = _this->GetMaskPixel(*param[0], *param[1]);
 	return TJS_S_OK;
 }
 TJS_END_NATIVE_METHOD_DECL(/*func. name*/getMaskPixel)
@@ -474,7 +474,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(bufferPitch)
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Bitmap);
 		if( _this->IsLoading() ) TVPThrowExceptionMessage(TVPCurrentlyAsyncLoadBitmap);
-		*result = (tTVInteger)_this->GetPixelBufferPitch();
+		*result = _this->GetPixelBufferPitch();
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER
@@ -488,7 +488,7 @@ TJS_BEGIN_NATIVE_PROP_DECL(loading)
 	TJS_BEGIN_NATIVE_PROP_GETTER
 	{
 		TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_Bitmap);
-		*result = (tTVInteger)( _this->IsLoading() ? 1 : 0 );
+		*result = (tjs_int)( _this->IsLoading() ? 1 : 0 );
 		return TJS_S_OK;
 	}
 	TJS_END_NATIVE_PROP_GETTER

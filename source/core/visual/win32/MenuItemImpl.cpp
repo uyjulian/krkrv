@@ -366,7 +366,7 @@ static iTJSDispatch2* keycodeToTextList = nullptr;
 
 static bool SetShortCutKeyCode(ttstr text, int key, bool force) {
 	tTJSVariant vtext(text);
-	tTJSVariant vkey((tTVInteger)key);
+	tTJSVariant vkey(key);
 
 	text.ToLowerCase();
 	if (TJS_FAILED(textToKeycodeMap->PropSet(TJS_MEMBERENSURE, text.c_str(), nullptr, &vkey, textToKeycodeMap)))

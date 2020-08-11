@@ -678,7 +678,7 @@ static iTJSDispatch2* Unpack( const std::vector<OctPackTemplate>& templ, const t
 			std::vector<tjs_int8> ret;
 			BinToNumber<tjs_int8,1>( ret, current, tail, (tjs_uint)len );
 			for( std::vector<tjs_int8>::const_iterator iter = ret.begin(); iter != ret.end(); iter++ ) {
-				result->Add( ni, tTJSVariant( (tTVInteger)*iter ) );
+				result->Add( ni, tTJSVariant( (tjs_int)*iter ) );
 			}
 			current += len;
 			break;
@@ -688,7 +688,7 @@ static iTJSDispatch2* Unpack( const std::vector<OctPackTemplate>& templ, const t
 			std::vector<tjs_uint8> ret;
 			BinToNumber<tjs_uint8,1>( ret, current, tail, (tjs_uint)len );
 			for( std::vector<tjs_uint8>::const_iterator iter = ret.begin(); iter != ret.end(); iter++ ) {
-				result->Add( ni, tTJSVariant( (tTVInteger)*iter ) );
+				result->Add( ni, tTJSVariant( (tjs_int)*iter ) );
 			}
 			current += len;
 			break;
@@ -735,7 +735,7 @@ static iTJSDispatch2* Unpack( const std::vector<OctPackTemplate>& templ, const t
 			std::vector<tjs_int> ret;
 			BinToNumber<tjs_int,4>( ret, current, tail, (tjs_uint)len );
 			for( std::vector<tjs_int>::const_iterator iter = ret.begin(); iter != ret.end(); iter++ ) {
-				result->Add( ni, tTJSVariant( (tTVInteger)*iter ) );
+				result->Add( ni, tTJSVariant( (tjs_int)*iter ) );
 			}
 			current += len*4;
 			break;
@@ -756,7 +756,7 @@ static iTJSDispatch2* Unpack( const std::vector<OctPackTemplate>& templ, const t
 			std::vector<tjs_uint16> ret;
 			BinToNumberBE<tjs_uint16,2>( ret, current, tail, (tjs_uint)len );
 			for( std::vector<tjs_uint16>::const_iterator iter = ret.begin(); iter != ret.end(); iter++ ) {
-				result->Add( ni, tTJSVariant( (tTVInteger)*iter ) );
+				result->Add( ni, tTJSVariant( (tjs_int)*iter ) );
 			}
 			current += len*2;
 			break;
@@ -782,7 +782,7 @@ static iTJSDispatch2* Unpack( const std::vector<OctPackTemplate>& templ, const t
 			std::vector<tjs_int16> ret;
 			BinToNumber<tjs_int16,2>( ret, current, tail, (tjs_uint)len );
 			for( std::vector<tjs_int16>::const_iterator iter = ret.begin(); iter != ret.end(); iter++ ) {
-				result->Add( ni, tTJSVariant( (tTVInteger)*iter ) );
+				result->Add( ni, tTJSVariant( (tjs_int)*iter ) );
 			}
 			current += len*2;
 			break;
@@ -792,7 +792,7 @@ static iTJSDispatch2* Unpack( const std::vector<OctPackTemplate>& templ, const t
 			std::vector<tjs_uint16> ret;
 			BinToNumber<tjs_uint16,2>( ret, current, tail, (tjs_uint)len );
 			for( std::vector<tjs_uint16>::const_iterator iter = ret.begin(); iter != ret.end(); iter++ ) {
-				result->Add( ni, tTJSVariant( (tTVInteger)*iter ) );
+				result->Add( ni, tTJSVariant( (tjs_int)*iter ) );
 			}
 			current += len*2;
 			break;
@@ -802,7 +802,7 @@ static iTJSDispatch2* Unpack( const std::vector<OctPackTemplate>& templ, const t
 			std::vector<tjs_uint16> ret;
 			BinToNumberLE<tjs_uint16,2>( ret, current, tail, (tjs_uint)len );
 			for( std::vector<tjs_uint16>::const_iterator iter = ret.begin(); iter != ret.end(); iter++ ) {
-				result->Add( ni, tTJSVariant( (tTVInteger)*iter ) );
+				result->Add( ni, tTJSVariant( (tjs_int)*iter ) );
 			}
 			current += len*2;
 			break;
