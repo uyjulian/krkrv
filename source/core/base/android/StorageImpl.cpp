@@ -30,7 +30,7 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <unistd.h>
-#include <psp2/io/dirent.h>
+#include <psp2/kernel/iofilemgr.h>
 #endif
 
 //---------------------------------------------------------------------------
@@ -123,19 +123,14 @@ void TJS_INTF_METHOD tTVPFileMedia::GetListAt(const ttstr &_name, iTVPStorageLis
 	tjs_string wname(name.AsStdString());
 	std::string nname;
 	if( TVPUtf16ToUtf8(nname, wname) ) {
-		DIR* dr;
-		if( ( dr = opendir(nname.c_str()) ) != nullptr ) {
-			struct dirent* entry;
-			while( ( entry = readdir( dr ) ) != nullptr ) {
-				struct stat file_info;
-				stat(entry->d_name, &file_info);
-#if 0
-				if( entry->d_type == DT_REG )
-#endif
-				if (S_ISREG(file_info.st_mode))
+		SceUID dr;
+		if( ( dr = sceIoDopen(nname.c_str()) ) >= 0 ) {
+			SceIoDirent entry;
+			while( sceIoDread( dr, &entry ) > 0 ) {
+				if (SCE_STM_ISREG(entry.d_stat.st_mode))
 				{
 					tjs_char fname[256];
-					tjs_int count = TVPUtf8ToWideCharString( entry->d_name, fname );
+					tjs_int count = TVPUtf8ToWideCharString( entry.d_name, fname );
 					fname[count] = TJS_W('\0');
 					ttstr file(fname);
 					tjs_char *p = file.Independ();
@@ -149,7 +144,7 @@ void TJS_INTF_METHOD tTVPFileMedia::GetListAt(const ttstr &_name, iTVPStorageLis
 				}
 				// entry->d_type == DT_UNKNOWN
 			}
-			closedir( dr );
+			sceIoDclose( dr );
 		}
 	}
 }
@@ -296,7 +291,15 @@ void TJS_INTF_METHOD tTVPFileMedia::GetLocallyAccessibleName(ttstr &name)
 		if(!*ptr) {
 			newname = TJS_W("");
 		} else {
-			newname = ptr;
+
+			if(TJS_strstr(ptr, TJS_W(":")) == nullptr)
+			{
+				newname = ttstr(TJS_W("app0:/")) + ptr;
+			}
+			else
+			{
+				newname = ptr;
+			}
 			// tjs_char dch = *ptr;
 			// if(*ptr < TJS_W('a') || *ptr > TJS_W('z')) {
 			// 	newname = TJS_W("");
@@ -359,33 +362,30 @@ void TVPPreNormalizeStorageName(ttstr &name)
 
 	tjs_char lastchar = name.GetLastChar();
 
-	if( TJS_strstr(name.c_str(), TJS_W("file:/")) == nullptr ) {
-		ttstr newname(TJS_W("file:/"));
+	if (TJS_strstr(name.c_str(), TJS_W(":")) == nullptr)
+	{
+		ttstr newname(TJS_W("file:/.//app0:/"));
 		newname += name;
 		name = newname;
 		return;
-		// char* tmppath = realpath(name.AsNarrowStdString().c_str(), NULL);
-		// if (tmppath) {
-		// 	ttstr newname(TJS_W("file:/.//"));
-		// 	newname += tmppath;
-		// 	if (lastchar == TJS_W('/'))
-		// 		newname += TJS_W("/");
-		// 	name = newname;
-		// 	free(tmppath);
-		// 	return;
-		// }
-	} else {
-		return;
 	}
+	else
+	{
+		if( TJS_strstr(name.c_str(), TJS_W("file:/")) == nullptr ) {
+			ttstr newname(TJS_W("file:/.//"));
+			newname += name;
+			name = newname;
+			return;
+		} else {
+			return;
+		}
+	}
+
 
 	if(namelen >= 1) {
 		if( name[0] == TJS_W('.') ) {
 			ttstr newname(TJS_W("file:/.//"));
-			char* cwd = realpath(".", NULL);
-			if (cwd != NULL) {
-				newname += ttstr(cwd);
-				free(cwd);
-			}
+			newname += ttstr("app0:/");
 			newname += (name.c_str()+1);
 			name = newname;
 			return;
@@ -479,7 +479,7 @@ bool TVPRemoveFile(const ttstr &name)
 {
 	std::string filename;
 	if( TVPUtf16ToUtf8( filename, name.AsStdString() ) ) {
-		return 0 == remove(filename.c_str());
+		return 0 == sceIoRemove(filename.c_str());
 	} else {
 		return false;
 	}
@@ -545,9 +545,9 @@ bool TVPCheckExistentLocalFile(const ttstr &name)
 {
 	std::string filename;
 	if( TVPUtf16ToUtf8( filename, name.AsStdString() ) ) {
-		struct stat st;
-		if( stat( filename.c_str(), &st) == 0) {
-			if( S_ISREG(st.st_mode) )
+		SceIoStat st;
+		if( sceIoGetstat( filename.c_str(), &st) >= 0) {
+			if( SCE_STM_ISREG(st.st_mode) )
 			return true;
 		}
 	}
@@ -565,9 +565,9 @@ bool TVPCheckExistentLocalFolder(const ttstr &name)
 {
 	std::string filename;
 	if( TVPUtf16ToUtf8( filename, name.AsStdString() ) ) {
-		struct stat st;
-		if( stat( filename.c_str(), &st) == 0) {
-			if( S_ISDIR(st.st_mode) )
+		SceIoStat st;
+		if( sceIoGetstat( filename.c_str(), &st) >= 0) {
+			if( SCE_STM_ISDIR(st.st_mode) )
 			return true;
 		}
 	}
@@ -650,7 +650,7 @@ static bool _TVPCreateFolders(const ttstr &folder)
 	std::string filename;
 	int res = -1;
 	if( TVPUtf16ToUtf8( filename, folder.AsStdString() ) ) {
-		res = sceIoMkdir( filename.c_str(), 0777 );
+		res = sceIoMkdir( filename.c_str(), 06 );
 	}
 	return 0 == res;
 }
@@ -681,27 +681,27 @@ tTVPLocalFileStream::tTVPLocalFileStream(const ttstr &origname,
 	const ttstr &localname, tjs_uint32 flag)
 {
 	tjs_uint32 access = flag & TJS_BS_ACCESS_MASK;
-	Handle = NULL;
-	const char* mode = "rb";
+	Handle = -1;
+	SceIoMode mode = SCE_O_RDONLY;
 	switch(access)
 	{
 	case TJS_BS_READ:
-		mode = "rb";		break;
+		mode = SCE_O_RDONLY;		break;
 	case TJS_BS_WRITE:
-		mode = "wb";		break;
+		mode = SCE_O_WRONLY | SCE_O_CREAT | SCE_O_TRUNC;		break;
 	case TJS_BS_APPEND:
-		mode = "ab";		break;
+		mode = SCE_O_APPEND | SCE_O_CREAT;		break;
 	case TJS_BS_UPDATE:
-		mode = "rb+";		break;
+		mode = SCE_O_RDWR | SCE_O_CREAT;		break;
 	}
 
 	tjs_int trycount = 0;
-	// std::string filename;
-	// TVPUtf16ToUtf8( filename, localname.AsStdString() );
+	std::string filename;
+	TVPUtf16ToUtf8( filename, localname.AsStdString() );
 
 retry:
-	Handle = fopen( localname.AsNarrowStdString().c_str(), mode );
-	if(Handle == nullptr)
+	Handle = sceIoOpen( filename.c_str(), mode, 0777 );
+	if(Handle < 0)
 	{
 		if(trycount == 0 && access == TJS_BS_WRITE)
 		{
@@ -715,7 +715,7 @@ retry:
 	}
 
 	if(access == TJS_BS_APPEND) // move the file pointer to last
-		fseek(Handle, 0, SEEK_END);
+		sceIoLseek(Handle, 0, SCE_SEEK_END);
 
 	// push current tick as an environment noise
 	tjs_uint32 tick = TVPGetRoughTickCount32();
@@ -724,7 +724,7 @@ retry:
 //---------------------------------------------------------------------------
 tTVPLocalFileStream::~tTVPLocalFileStream()
 {
-	if(Handle!=nullptr) fclose(Handle);
+	if(Handle>=0) sceIoClose(Handle);
 
 	// push current tick as an environment noise
 	// (timing information from file accesses may be good noises)
@@ -737,46 +737,38 @@ tjs_uint64 TJS_INTF_METHOD tTVPLocalFileStream::Seek(tjs_int64 offset, tjs_int w
 	int dwmm;
 	switch(whence)
 	{
-	case TJS_BS_SEEK_SET:	dwmm = SEEK_SET;	break;
-	case TJS_BS_SEEK_CUR:	dwmm = SEEK_CUR;	break;
-	case TJS_BS_SEEK_END:	dwmm = SEEK_END;	break;
-	default:				dwmm = SEEK_SET;	break; // may be enough
+	case TJS_BS_SEEK_SET:	dwmm = SCE_SEEK_SET;	break;
+	case TJS_BS_SEEK_CUR:	dwmm = SCE_SEEK_CUR;	break;
+	case TJS_BS_SEEK_END:	dwmm = SCE_SEEK_END;	break;
+	default:				dwmm = SCE_SEEK_SET;	break; // may be enough
 	}
 
-	if( fseek( Handle, offset, dwmm ) )
-		TVPThrowExceptionMessage(TVPSeekError);
-
-	tjs_uint low = ftell( Handle );
-	return low;
+	return sceIoLseek( Handle, offset, dwmm );
 }
 //---------------------------------------------------------------------------
 tjs_uint TJS_INTF_METHOD tTVPLocalFileStream::Read(void *buffer, tjs_uint read_size)
 {
-	size_t ret = fread( buffer, 1, read_size, Handle );
+	size_t ret = sceIoRead( Handle, buffer, read_size );
 	return (tjs_uint)ret;
 }
 //---------------------------------------------------------------------------
 tjs_uint TJS_INTF_METHOD tTVPLocalFileStream::Write(const void *buffer, tjs_uint write_size)
 {
-	size_t ret = fwrite( buffer, 1, write_size, Handle );
+	size_t ret = sceIoWrite( Handle, buffer, write_size );
 	return (tjs_uint)ret;
 }
 //---------------------------------------------------------------------------
 void TJS_INTF_METHOD tTVPLocalFileStream::SetEndOfStorage()
 {
-	if( fseek( Handle, 0, SEEK_END ) )
-		TVPThrowExceptionMessage(TVPSeekError);
+	sceIoLseek(Handle, 0, SCE_SEEK_END);
 }
 //---------------------------------------------------------------------------
 tjs_uint64 TJS_INTF_METHOD tTVPLocalFileStream::GetSize()
 {
-	tjs_uint64 ret;
-	struct stat stbuf;
-	if( fstat( fileno(Handle), &stbuf) != 0 ) {
-		TVPThrowExceptionMessage(TVPSeekError);
-	}
-	ret = stbuf.st_size;
-	return ret;
+	SceOff oldpos = sceIoLseek( Handle, 0, SCE_SEEK_CUR );
+	SceOff retpos = sceIoLseek(Handle, 0, SCE_SEEK_END);
+	sceIoLseek( Handle, oldpos, SCE_SEEK_SET );
+	return retpos;
 }
 //---------------------------------------------------------------------------
 

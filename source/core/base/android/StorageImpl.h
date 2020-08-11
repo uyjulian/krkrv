@@ -15,6 +15,7 @@
 #include "UtilStreams.h"
 #include <functional>
 #include <stdio.h>
+#include <psp2/kernel/iofilemgr.h> 
 
 
 #ifndef S_IFMT
@@ -40,7 +41,7 @@ void TVPGetLocalFileListAt(const ttstr &name, const std::function<void(const tts
 class tTVPLocalFileStream : public tTJSBinaryStream
 {
 private:
-	FILE* Handle;
+	SceUID Handle;
 
 public:
 	tTVPLocalFileStream(const ttstr &origname, const ttstr & localname,
@@ -56,7 +57,7 @@ public:
 
 	tjs_uint64 TJS_INTF_METHOD GetSize();
 
-	FILE* GetHandle() const { return Handle; }
+	SceUID GetHandle() const { return Handle; }
 };
 //---------------------------------------------------------------------------
 

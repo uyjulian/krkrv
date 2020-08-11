@@ -1011,7 +1011,7 @@ void TVPBeforeSystemInit()
 	TVPInitRandomGenerator();
 
 	// memory usage
-	TVPTotalPhysMemory = 128 * 1024 * 1024;
+	TVPTotalPhysMemory = 64 * 1024 * 1024;
 #if 0
 	{
 		MEMORYSTATUSEX status = { sizeof(MEMORYSTATUSEX) };
@@ -1254,7 +1254,7 @@ void TVPBeforeSystemInit()
 	}
 #endif
 	TVPProjectDirSelected = true;
-	TVPProjectDir = TVPNormalizeStorageName(TVPGetAppPath() + "/");
+	TVPProjectDir = TVPNormalizeStorageName("file:/.//app0:/");
 	TVPSetCurrentDirectory(TVPProjectDir);
 }
 //---------------------------------------------------------------------------

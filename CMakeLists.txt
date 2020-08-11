@@ -1,15 +1,15 @@
 cmake_minimum_required(VERSION 2.8)
 
 if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
-  if(DEFINED ENV{VITASDK})
-    set(CMAKE_TOOLCHAIN_FILE "$ENV{VITASDK}/share/vita.toolchain.cmake" CACHE PATH "toolchain file")
+  if(DEFINED ENV{DOLCESDK})
+    set(CMAKE_TOOLCHAIN_FILE "$ENV{DOLCESDK}/share/dolce.toolchain.cmake" CACHE PATH "toolchain file")
   else()
-    message(FATAL_ERROR "Please define VITASDK to point to your SDK path!")
+    message(FATAL_ERROR "Please define DOLCESDK to point to your SDK path!")
   endif()
 endif()
 
 project(krkrv)
-include("${VITASDK}/share/vita.cmake" REQUIRED)
+include("${DOLCESDK}/share/dolce.cmake" REQUIRED)
 
 set(VITA_APP_NAME "Kirikiri for Playstation Vita")
 set(VITA_TITLEID  "KRKR00001")
@@ -26,7 +26,7 @@ include_directories(
   source source/core source/core/movie source/core/movie/ffmpeg source/core/extension source/core/msg source/core/msg/win32 source/core/tjs2 source/core/utils source/core/utils/encoding source/core/utils/win32 source/core/environ source/core/environ/android source/core/environ/win32 source/core/visual source/core/visual/gl source/core/visual/win32 source/core/sdl2 source/core/sound source/core/sound/win32 source/core/base source/core/base/android source/core/base/win32 source/plugins source/plugins/ncbind
 )
 
-include_directories($ENV{VITASDK}/arm-vita-eabi/include/freetype2)
+include_directories($ENV{DOLCESDK}/arm-dolce-eabi/include/freetype2)
 
 add_executable(${PROJECT_NAME}
   source/core/movie/krmovie.cpp
@@ -194,6 +194,9 @@ target_link_libraries(${PROJECT_NAME}
 
   SDL2
   vita2d
+  SceAppMgr_stub
+  SceAppUtil_stub
+  SceShellSvc_stub
   SceDisplay_stub
   SceCtrl_stub
   SceAudio_stub
@@ -218,8 +221,8 @@ target_link_libraries(${PROJECT_NAME}
 
 )
 
-vita_create_self(${PROJECT_NAME}.self ${PROJECT_NAME})
-vita_create_vpk(${PROJECT_NAME}.vpk ${VITA_TITLEID} ${PROJECT_NAME}.self
+dolce_create_self(${PROJECT_NAME}.self ${PROJECT_NAME})
+dolce_create_vpk(${PROJECT_NAME}.vpk ${VITA_TITLEID} ${PROJECT_NAME}.self
   VERSION ${VITA_VERSION}
   NAME ${VITA_APP_NAME}
   FILE sce_sys/icon0.png sce_sys/icon0.png

@@ -810,9 +810,26 @@ bool sdlProcessEventsForFrames(int frames) {
 	}
 }
 
+#include <psp2/message_dialog.h>
+#include <psp2/kernel/threadmgr.h>
+#include <psp2/apputil.h>
+
+#include <psp2/appmgr.h>
+#include <psp2/apputil.h>
+#include <psp2/types.h>
+#include <psp2/kernel/processmgr.h>
+#include <psp2/message_dialog.h>
+#include <psp2/display.h>
+#include <psp2/apputil.h>
+
+#include <vita2d.h>
+
 int main(int argc, char **argv) {
 	_argc = argc;
 	_wargv = new tjs_char*[argc];
+
+	sceAppUtilInit(&(SceAppUtilInitParam){}, &(SceAppUtilBootParam){});
+    sceCommonDialogSetConfigParam(&(SceCommonDialogConfigParam){});
 
 	for (int i = 0; i < argc; i += 1) {
 		const tjs_char* warg;
@@ -943,7 +960,47 @@ iWindowLayer *TVPCreateAndAddWindow(tTJSNI_Window *w) {
 	return ret;
 }
 
+#include "CharacterSet.h"
 void TVPConsoleLog(const ttstr &l, bool important) {
+#if 0
+	if (l != ttstr("\n"))
+	{
+		SceMsgDialogParam param;
+		sceMsgDialogParamInit(&param);
+		param.mode = SCE_MSG_DIALOG_MODE_USER_MSG;
+		SceMsgDialogUserMessageParam msgParam;
+		memset(&msgParam, 0, sizeof(SceMsgDialogUserMessageParam));
+		std::string msg;
+		TVPUtf16ToUtf8( msg, l.AsStdString() );
+		msgParam.msg = (const SceChar8*)msg.c_str();
+		msgParam.buttonType = SCE_MSG_DIALOG_BUTTON_TYPE_OK;
+		param.userMsgParam = &msgParam;
+
+	    vita2d_init();
+	   	if (sceMsgDialogInit(&param) >= 0)
+		{
+			while (1) {
+
+				vita2d_start_drawing();
+				vita2d_clear_screen();
+
+				SceCommonDialogStatus status = sceMsgDialogGetStatus();
+
+				if (status == SCE_COMMON_DIALOG_STATUS_FINISHED) {
+					sceMsgDialogTerm();
+					break;
+				}
+
+				vita2d_end_drawing();
+				vita2d_common_dialog_update();
+				vita2d_swap_buffers();
+				sceDisplayWaitVblankStart();
+			}
+		}
+
+
+	}
+#endif
 	fprintf(stderr, "%s", l.AsNarrowStdString().c_str());
 }
 

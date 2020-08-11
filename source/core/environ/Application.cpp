@@ -91,7 +91,7 @@ inline void DumpMemoryLeaks()
 tjs_string ExePath() {
 	static tjs_string exepath(TJS_W(""));
 	if (exepath.empty()) {
-		exepath = tjs_string(_wargv[0]);
+		exepath = tjs_string(TJS_W("app0:/eboot.bin"));
 	}
 	return exepath;
 }
