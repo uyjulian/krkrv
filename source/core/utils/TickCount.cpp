@@ -15,15 +15,14 @@
 #include "SysInitIntf.h"
 #include "ThreadIntf.h"
 
+#if 0
 #ifdef _WIN32
 #include <mmsystem.h>
 #else
 #include <time.h>
-#if 1
-#include <psp2/kernel/processmgr.h>
-#include <psp2/rtc.h>
 #endif
 #endif
+#include <SDL2/SDL.h>
 
 #if 0
 // システムに依存しない実装ではあるが、乱数の偏り等懸念される
@@ -44,6 +43,7 @@ public:
 //---------------------------------------------------------------------------
 #endif
 
+#if 0
 //---------------------------------------------------------------------------
 // 64bit may enough to hold usual time count.
 // ( 32bit is clearly insufficient )
@@ -52,6 +52,7 @@ static tjs_uint64 TVPTickCountBias = 0;
 static tjs_uint TVPWatchLastTick;
 static tTJSCriticalSection TVPTickWatchCS;
 //---------------------------------------------------------------------------
+#endif
 
 //---------------------------------------------------------------------------
 // TVPGetRoughTickCount
@@ -59,23 +60,23 @@ static tTJSCriticalSection TVPTickWatchCS;
 //---------------------------------------------------------------------------
 tjs_uint32 TVPGetRoughTickCount32()
 {
+#if 0
 #ifdef _WIN32
 	return timeGetTime();	// win32 mmsystem.h
 #else
-#if 1
-	return sceKernelGetProcessTimeWide();
-#else
 	struct timespec now;
 	clock_gettime( CLOCK_MONOTONIC, &now );	// Android の SystemClock.uptimeMillis() では SYSTEM_TIME_MONOTONIC(CLOCK_MONOTONIC) が使われている
-	// clock_gettime( CLOCK_BOOTTIME, &now );
+	//clock_gettime( CLOCK_BOOTTIME, &now );
 	return static_cast<tjs_uint32>( now.tv_sec * 1000LL + now.tv_nsec / 1000000LL );
 #endif
 #endif
+	return SDL_GetTicks();
 //	return TVPTickCounter.Count();
 }
 
 
 //---------------------------------------------------------------------------
+#if 0
 static tjs_uint TVPCheckTickOverflow()
 {
 	tjs_uint curtick;
@@ -161,6 +162,7 @@ static void TVPWatchThreadUninit()
 static tTVPAtExit TVPWatchThreadUninitAtExit(TVP_ATEXIT_PRI_SHUTDOWN,
 	TVPWatchThreadUninit);
 //---------------------------------------------------------------------------
+#endif
 
 
 
@@ -169,11 +171,14 @@ static tTVPAtExit TVPWatchThreadUninitAtExit(TVP_ATEXIT_PRI_SHUTDOWN,
 //---------------------------------------------------------------------------
 tjs_uint64 TVPGetTickCount()
 {
+#if 0
 	TVPWatchThreadInit();
 
 	tjs_uint curtick = TVPCheckTickOverflow();
 
 	return curtick + TVPTickCountBias;
+#endif
+	return TVPGetRoughTickCount32();
 }
 //---------------------------------------------------------------------------
 
@@ -184,7 +189,9 @@ tjs_uint64 TVPGetTickCount()
 //---------------------------------------------------------------------------
 void TVPStartTickCount()
 {
+#if 0
 	TVPWatchThreadInit();
+#endif
 }
 //---------------------------------------------------------------------------
 
