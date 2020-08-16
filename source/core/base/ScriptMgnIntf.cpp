@@ -797,14 +797,6 @@ void TVPBeforeProcessUnhandledException()
 
 
 #include <psp2/message_dialog.h>
-#include <psp2/kernel/threadmgr.h>
-#include <psp2/apputil.h>
-
-#include <psp2/appmgr.h>
-#include <psp2/apputil.h>
-#include <psp2/types.h>
-#include <psp2/kernel/processmgr.h>
-#include <psp2/message_dialog.h>
 #include <psp2/display.h>
 #include <psp2/apputil.h>
 
