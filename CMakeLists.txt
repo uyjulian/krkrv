@@ -24,6 +24,7 @@ set(C_FLAGS
     -DTVP_IMAGE_ENABLE_JPEG
     -DTVP_IMAGE_ENABLE_PNG
     -DTVP_IMAGE_ENABLE_TLG
+    -DTVP_RENDERER_ENABLE_FFMPEG
     -DTVP_TEXT_READ_ANSI_MBCS
 )
 
@@ -253,6 +254,14 @@ target_link_libraries(${PROJECT_NAME}
     vorbisfile
     vorbis
     ogg
+
+    avcodec
+    avfilter
+    avformat
+    avutil
+    swscale
+    swresample
+    mp3lame
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${INCLUDES})
