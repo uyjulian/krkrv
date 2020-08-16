@@ -6,8 +6,8 @@ Kirikiri is almost always exclusively used with [Kirikiri Adventure Game 3 (KAG3
 
 ## Building
 
-After installing the prerequisite libraries using `vdpm`, `mkdir b && cd b && cmake .. && make` will generate `krkrv.vpk`.  
-If you get an "file not found" or "library not found" error while compiling the engine, install the missing library from `vdpm`.
+After installing the prerequisite libraries using `ddpm`, `mkdir b && cd b && cmake .. && make` will generate `krkrv.vpk`.  
+If you get an "file not found" or "library not found" error while compiling the engine, install the missing library from `ddpm`.
 
 ## Project Directory Selection
 
