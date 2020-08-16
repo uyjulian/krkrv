@@ -650,7 +650,7 @@ static bool _TVPCreateFolders(const ttstr &folder)
 	std::string filename;
 	int res = -1;
 	if( TVPUtf16ToUtf8( filename, folder.AsStdString() ) ) {
-		res = sceIoMkdir( filename.c_str(), 06 );
+		res = sceIoMkdir( filename.c_str(), 0777 );
 	}
 	return 0 == res;
 }

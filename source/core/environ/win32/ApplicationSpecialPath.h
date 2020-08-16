@@ -58,7 +58,7 @@ public:
 	}
 	static tjs_string GetDataPathDirectory( tjs_string datapath, const tjs_string& exename ) {
 		if (datapath != TJS_W("")) return datapath;
-		ttstr nativeDataPath = ttstr(TJS_W("ux0:/savedata/"));
+		ttstr nativeDataPath = ttstr(TJS_W("savedata0:/savedata/"));
 		// static tjs_string nativeDataPath(TJS_W(""));
 		// if (nativeDataPath.empty()) {
 		// 	nativeDataPath = tjs_string(TVPGetAppPath() + "/savedata/");

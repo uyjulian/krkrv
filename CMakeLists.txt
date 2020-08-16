@@ -13,7 +13,7 @@ include("${DOLCESDK}/share/dolce.cmake" REQUIRED)
 
 set(VITA_APP_NAME "Kirikiri for Playstation Vita")
 set(VITA_TITLEID  "KRKR00001")
-set(VITA_VERSION  "01.00")
+set(VITA_VERSION  "01.01")
 
 set(C_FLAGS
     -DTVP_ARCHIVE_ENABLE_XP3
