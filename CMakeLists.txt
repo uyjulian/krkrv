@@ -15,6 +15,10 @@ set(VITA_APP_NAME "Kirikiri for Playstation Vita")
 set(VITA_TITLEID  "KRKR00001")
 set(VITA_VERSION  "01.01")
 
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE RelWithDebInfo)
+endif()
+
 set(C_FLAGS
     -DTVP_ARCHIVE_ENABLE_XP3
     -DTVP_AUDIO_ENABLE_VORBIS
@@ -31,6 +35,10 @@ set(C_FLAGS
 set(CXX_FLAGS ${C_FLAGS}
     -fno-delete-null-pointer-checks
     -fpermissive
+)
+
+set(OPTIMIZATION_FLAGS
+    -Ofast
 )
 
 set(INCLUDES
@@ -267,6 +275,8 @@ target_link_libraries(${PROJECT_NAME}
 target_include_directories(${PROJECT_NAME} PUBLIC ${INCLUDES})
 target_compile_options(${PROJECT_NAME} PUBLIC $<$<COMPILE_LANGUAGE:C>:${C_FLAGS}>)
 target_compile_options(${PROJECT_NAME} PUBLIC $<$<COMPILE_LANGUAGE:CXX>:${CXX_FLAGS}>)
+target_compile_options(${PROJECT_NAME} PUBLIC $<$<CONFIG:RELEASE>:${OPTIMIZATION_FLAGS}>)
+target_compile_options(${PROJECT_NAME} PUBLIC $<$<CONFIG:RELWITHDEBINFO>:${OPTIMIZATION_FLAGS}>)
 
 dolce_create_self(${PROJECT_NAME}.self ${PROJECT_NAME})
 
