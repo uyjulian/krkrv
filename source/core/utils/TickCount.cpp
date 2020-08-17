@@ -22,7 +22,7 @@
 #include <time.h>
 #endif
 #endif
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 #if 0
 // システムに依存しない実装ではあるが、乱数の偏り等懸念される

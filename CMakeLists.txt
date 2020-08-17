@@ -229,6 +229,7 @@ set(SOURCES
 )
 
 include_directories($ENV{DOLCESDK}/arm-dolce-eabi/include/freetype2)
+include_directories($ENV{DOLCESDK}/arm-dolce-eabi/include/SDL2)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 

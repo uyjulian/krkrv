@@ -14,7 +14,7 @@
 #include "tjsVariant.h"
 #include "tjsString.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 namespace TJS
 {

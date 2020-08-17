@@ -14,7 +14,7 @@
 #include "ThreadIntf.h"
 #include "MsgIntf.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 
 //---------------------------------------------------------------------------

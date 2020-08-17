@@ -19,7 +19,7 @@
 #include <sstream>
 #include <iomanip>
 #include "DebugIntf.h"
-#include "SDL2/SDL.h"
+#include "SDL.h"
 #include <unordered_set>
 #include <algorithm>
 

@@ -8,7 +8,7 @@
 #include <functional>
 #include <tuple>
 #include <map>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 tjs_string ExePath();
 
