@@ -344,6 +344,13 @@ tjs_int TVPGetOSBits()
 //---------------------------------------------------------------------------
 bool TVPShellExecute(const ttstr &target, const ttstr &param)
 {
+	SceAppUtilWebBrowserParam browser_param;
+	memset(&browser_param, 0, sizeof(SceAppUtilWebBrowserParam));
+	std::string url;
+	TVPUtf16ToUtf8(url, target.AsStdString());
+	browser_param.str = url.c_str();
+	browser_param.strlen = target.GetLen();
+	sceAppUtilLaunchWebBrowser(&browser_param);
 	// open or execute target file
 //	ttstr file = TVPGetNativeName(TVPNormalizeStorageName(target));
 #if 0
