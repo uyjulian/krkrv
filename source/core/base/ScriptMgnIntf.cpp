@@ -821,7 +821,7 @@ void TVPShowScriptException(eTJS &e)
 	{
 		ttstr errstr = (ttstr(TVPScriptExceptionRaised) + TJS_W("\n") + e.GetMessage());
 		TVPAddLog(ttstr(TVPScriptExceptionRaised) + TJS_W("\n") + e.GetMessage());
-#if 1
+#if 0
 		SceMsgDialogParam param;
 		sceMsgDialogParamInit(&param);
 		param.mode = SCE_MSG_DIALOG_MODE_USER_MSG;
@@ -873,7 +873,7 @@ void TVPShowScriptException(eTJSScriptError &e)
 		TVPAddLog(ttstr(TVPScriptExceptionRaised) + TJS_W("\n") + e.GetMessage());
 		if(e.GetTrace().GetLen() != 0)
 			TVPAddLog(ttstr(TJS_W("trace : ")) + e.GetTrace());
-#if 1
+#if 0
 		SceMsgDialogParam param;
 		sceMsgDialogParamInit(&param);
 		param.mode = SCE_MSG_DIALOG_MODE_USER_MSG;

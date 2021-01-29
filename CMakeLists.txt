@@ -239,11 +239,12 @@ target_link_libraries(${PROJECT_NAME}
     stdc++
 
     SDL2
-    vita2d
+    pib
     SceAppMgr_stub
     SceAppUtil_stub
     SceShellSvc_stub
     SceDisplay_stub
+    SceDisplayUser_stub
     SceCtrl_stub
     SceAudio_stub
     SceSysmodule_stub
@@ -251,6 +252,7 @@ target_link_libraries(${PROJECT_NAME}
     SceCommonDialog_stub
     SceTouch_stub
     SceHid_stub
+    SceMotion_stub
     m
     z
     turbojpeg
